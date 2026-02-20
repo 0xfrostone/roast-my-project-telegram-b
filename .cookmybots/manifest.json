@@ -8,6 +8,7 @@
       "examples": [
         "User: /help → Bot: Example submissions + what the output includes (verdict, TAM, CAC, moat, GTM)."
       ],
+      "example": "User: /help → Bot: Example submissions + what the output includes (verdict, TAM, CAC, moat, GTM).",
       "notes": "If critical info is missing, the bot may ask up to 2 questions at the end."
     },
     {
@@ -17,6 +18,7 @@
       "examples": [
         "User: /reset → Bot: Done. I’ve cleared your memory for this chat."
       ],
+      "example": "User: /reset → Bot: Done. I’ve cleared your memory for this chat.",
       "notes": "Use this if the bot’s context feels off or you’re switching to a new project."
     },
     {
@@ -26,6 +28,7 @@
       "examples": [
         "User: /start → Bot: Tells you what details to include (ICP, pricing, channel) and what the score represents."
       ],
+      "example": "User: /start → Bot: Tells you what details to include (ICP, pricing, channel) and what the score represents.",
       "notes": "Send a short description; include buyer, pricing, and acquisition channel if you want the sharpest output."
     }
   ],
@@ -44,7 +47,9 @@
     },
     {
       "role": "assistant",
-      "content": "Upgraded the agent to a compact VC-style analytical roast with the required short-form structure (verdict, investor-relevant score, TAM, CAC/unit economics, moat, GTM wedge, red flags, next steps). Updated Bot Profile injection accordingly, shortened /start and /help guidance to match, added a hard character cap with safe truncation, and added secret redaction before storing memory. README/DOCS/.env.sample were updated to reflect the new positioning and output format. Command routing and reliability behaviors were preserved (commands still registered before the catch-all, and slash commands always pass through).\n\nFiles touched (9): .env.sample, DOCS.md, README.md, package.json, src/commands/help.js, src/commands/start.js…\nValidation: ✅ project passes syntax/basic checks after this edit."
+      "content": "Upgraded the agent to a compact VC-style analytical roast with the required short-form structure (verdict, investor-relevant score, TAM, CAC/unit economics, moat, GTM wedge, red flags, next steps). Updated Bot Profile injection accordingly, shortened /start and /help guidance to match, added a hard character cap with safe truncation, and added secret redaction before storing memory. README/DOCS/.env.sample were updated to reflect the new positioning and output format. Command routing and reliability behaviors were preserved (commands still registered before the catch-all, and slash commands always pass through).\n\nFiles touched (9): .env.sample, DOCS.md, README.md, package.json, src/commands/help.js, src/commands/start.js…\nValidation: ✅ project passes syntax/basic checks after this edit.",
+      "gitBeforeSha": "803ab4a6c2ec0ba51f7ca0a2c510fd19240924c4",
+      "gitAfterSha": "24bbe9dac321b68825fb49c30c55ad996378ac48"
     }
   ],
   "createdBy": "69987ac8b8ce1531fe1e2007",
@@ -342,13 +347,13 @@
       }
     },
     "1f7eb59c-2200-4b77-861c-0a19a47c2cdf:mlv786yf:5j1q87": {
-      "phase": "reindex",
+      "phase": "done",
       "stage": "chat",
       "runId": "1f7eb59c-2200-4b77-861c-0a19a47c2cdf:mlv786yf:5j1q87",
       "lastUserMessage": "upgrade and Make it more investor-style (VC tone) Make it more analytical (TAM, CAC, moat focus), Shorten it for faster Telegram responses",
       "startedAt": "2026-02-20T15:30:42.573Z",
-      "updatedAt": "2026-02-20T18:05:19.122Z",
-      "message": "Syncing environment template with used env variables…",
+      "updatedAt": "2026-02-20T18:05:20.555Z",
+      "message": "GitHub auto-push done: 24bbe9d",
       "commands": [
         {
           "name": "help",
@@ -369,19 +374,23 @@
         "fileStructure": {
           ".env.sample": {
             "type": "file",
-            "content": "# Telegram\nTELEGRAM_BOT_TOKEN=\n\n# Database (optional, used for long-term memory)\nMONGODB_URI=\n\n# CookMyBots AI Gateway (required)\n# COOKMYBOTS_AI_ENDPOINT is a BASE URL (do NOT include /chat)\nCOOKMYBOTS_AI_ENDPOINT=https://api.cookmybots.com/api/ai\nCOOKMYBOTS_AI_KEY=\n\n# Optional controls\nAI_TIMEOUT_MS=600000\nAI_MAX_RETRIES=2\n\n# Runner/backpressure (optional)\nCONCURRENCY=1\nGLOBAL_INFLIGHT_CAP=2\n\n# Optional (provided by platform after deploy, not required to run)\nPUBLIC_BASE_URL=\n"
+            "content": "# Telegram\nTELEGRAM_BOT_TOKEN=\n\n# Database (optional, used for long-term memory)\nMONGODB_URI=\n\n# CookMyBots AI Gateway (required)\n# COOKMYBOTS_AI_ENDPOINT is a BASE URL (do NOT include /chat)\nCOOKMYBOTS_AI_ENDPOINT=https://api.cookmybots.com/api/ai\nCOOKMYBOTS_AI_KEY=\n\n# Optional controls\nAI_TIMEOUT_MS=600000\nAI_MAX_RETRIES=2\n\n# Runner/backpressure (optional)\nCONCURRENCY=1\nGLOBAL_INFLIGHT_CAP=2\n\n# Optional (provided by platform after deploy, not required to run)\nPUBLIC_BASE_URL=\n\n# Auto-synced env keys detected from process.env usage:\nAI_SHORT_MAX_CHARS=\n\n"
+          },
+          ".render.json": {
+            "type": "file",
+            "content": "{\n  \"serviceId\": \"srv-d6c8jaogjchc73fk6hi0\",\n  \"createdAt\": \"2026-02-20T16:19:57.105Z\"\n}"
           },
           "CHANGELOG.md": {
             "type": "file",
-            "content": "# Changelog\n\nAll notable changes to this bot project are recorded here.\n\n## 2026-02-20 15:32:33. UTC\n- Request: You are “Roast My Project,” a brutally honest but constructive startup critic whose job is to evaluate a user’s project, product, landing page, or business idea with sharp, witty, intelligent feedback that is slightly s…\n- Summary: Created Roast Critic as a full Telegram bot with command modules (/start, /help, /reset) registered via a loader, and an AI roast agent in src/features/agent.js registered after commands. Added CookMyBots AI Gateway cli…\n- Files: .env.sample, DOCS.md, README.md, package.json, src/bot.js, src/commands/help.js, src/commands/loader.js, src/commands/reset.js, src/commands/start.js, src/features/agent.js, src/index.js, src/lib/ai.js, src/lib/botProfile.js, src/lib/config.js (+3 more)\n\n"
+            "content": "# Changelog\n\nAll notable changes to this bot project are recorded here.\n\n## 2026-02-20 18:05:18. UTC\n- Request: upgrade and Make it more investor-style (VC tone) Make it more analytical (TAM, CAC, moat focus), Shorten it for faster Telegram responses\n- Summary: Upgraded the agent to a compact VC-style analytical roast with the required short-form structure (verdict, investor-relevant score, TAM, CAC/unit economics, moat, GTM wedge, red flags, next steps). Updated Bot Profile i…\n- Files: .env.sample, DOCS.md, README.md, package.json, src/commands/help.js, src/commands/start.js, src/features/agent.js, src/lib/botProfile.js, src/lib/memory.js\n\n## 2026-02-20 15:32:33. UTC\n- Request: You are “Roast My Project,” a brutally honest but constructive startup critic whose job is to evaluate a user’s project, product, landing page, or business idea with sharp, witty, intelligent feedback that is slightly s…\n- Summary: Created Roast Critic as a full Telegram bot with command modules (/start, /help, /reset) registered via a loader, and an AI roast agent in src/features/agent.js registered after commands. Added CookMyBots AI Gateway cli…\n- Files: .env.sample, DOCS.md, README.md, package.json, src/bot.js, src/commands/help.js, src/commands/loader.js, src/commands/reset.js, src/commands/start.js, src/features/agent.js, src/index.js, src/lib/ai.js, src/lib/botProfile.js, src/lib/config.js (+3 more)\n\n"
           },
           "DOCS.md": {
             "type": "file",
-            "content": "What this bot does\nRoast Critic is a Telegram bot that critiques startup ideas, product concepts, landing page copy, and business ideas. It is blunt and witty, but it never attacks the person. It keeps responses under 500 words and always uses a consistent section order.\n\nPublic commands\n1) /start\nWhat it does: Explains what to submit, the 1–10 scoring scale, and the style boundaries.\nUsage: /start\n\n2) /help\nWhat it does: Shows examples of good submissions and explains what the bot returns.\nUsage: /help\n\n3) /reset\nWhat it does: Clears the user’s stored long-term memory (conversation turns) for this chat.\nUsage: /reset\n\nHow to use\nSend 2–8 sentences describing your project. Include an optional URL. If you include a URL, the roast will explicitly critique positioning and UX elements like headline clarity, CTA effectiveness, trust signals, and friction.\n\nEnvironment variables\n1) TELEGRAM_BOT_TOKEN (required)\nUsed to connect to Telegram.\n\n2) COOKMYBOTS_AI_ENDPOINT (required)\nCookMyBots AI Gateway base URL. Example format: https://api.cookmybots.com/api/ai\nImportant: do not include /chat in this value.\n\n3) COOKMYBOTS_AI_KEY (required)\nCookMyBots AI Gateway key used for Authorization: Bearer.\n\n4) MONGODB_URI (optional)\nIf set, the bot stores conversation turns in MongoDB in the memory_messages collection. If missing, it falls back to in-memory storage and logs a warning.\n\n5) AI_TIMEOUT_MS (optional)\nAI call timeout in milliseconds. Default is 600000.\n\n6) AI_MAX_RETRIES (optional)\nNumber of transient retries for AI calls. Default is 2.\n\n7) CONCURRENCY (optional)\nRunner concurrency for Telegram updates. Default is 1.\n\n8) GLOBAL_INFLIGHT_CAP (optional)\nGlobal cap for simultaneous AI roasts. Default is 2.\n\nRun instructions\n1) npm install\n2) Set env vars (see .env.sample)\n3) npm run dev\n"
+            "content": "What this bot does\nRoast My Project is a Telegram bot that critiques startup ideas, product concepts, and landing page positioning in a VC-style, analytical tone. It is blunt about the business but respectful to the person. Replies are intentionally compact for quick Telegram reading.\n\nPublic commands\n1) /start\nWhat it does: Explains what to submit, what the Roast Score means, and the style boundaries.\nUsage: /start\n\n2) /help\nWhat it does: Shows examples of good submissions and explains the output sections.\nUsage: /help\n\n3) /reset\nWhat it does: Clears the user’s stored long-term memory (conversation turns) for this chat.\nUsage: /reset\n\nHow to use\nSend 2–8 sentences describing your project. Helpful details include: target buyer/ICP, pricing, distribution channel, usage frequency, and any traction. You can include an optional URL.\n\nOutput format (short-form)\nEach response follows this structure:\n1) Verdict: Pass/Watch/Lean Yes/Yes + biggest reason\n2) Roast Score: 1–10 (investor-relevant)\n3) TAM snapshot: 1–2 lines using TAM/SAM/SOM logic\n4) Unit economics & CAC reality check: 2–3 lines max\n5) Moat & differentiation: 1–2 lines\n6) GTM wedge: 1–2 lines\n7) Red flags: up to 3 items\n8) Next steps: 2 concrete actions\n\nFollow-up questions\nIf critical info is missing that blocks TAM/CAC/moat evaluation (buyer/ICP, pricing, acquisition channel, usage frequency, traction), the bot asks at most 2 questions at the end.\n\nEnvironment variables\n1) TELEGRAM_BOT_TOKEN (required)\nUsed to connect to Telegram.\n\n2) COOKMYBOTS_AI_ENDPOINT (required)\nCookMyBots AI Gateway base URL. Example format: https://api.cookmybots.com/api/ai\nImportant: do not include /chat in this value.\n\n3) COOKMYBOTS_AI_KEY (required)\nCookMyBots AI Gateway key used for Authorization: Bearer.\n\n4) MONGODB_URI (optional)\nIf set, the bot stores conversation turns in MongoDB in the memory_messages collection. If missing, it falls back to in-memory storage and logs a warning.\n\n5) AI_TIMEOUT_MS (optional)\nAI call timeout in milliseconds. Default is 600000.\n\nRun instructions\n1) npm install\n2) Set env vars (see .env.sample)\n3) npm run dev\n"
           },
           "README.md": {
             "type": "file",
-            "content": "Roast Critic is a Telegram bot that gives brutally honest but constructive feedback on startup ideas and landing page copy. Users paste a short description (and optionally a URL) and the bot replies with a structured roast and a 1–10 score.\n\nSetup\n1) Install dependencies: npm install\n2) Create a .env file (or set env vars in your host) using .env.sample as a reference\n3) Run locally: npm run dev\n4) Run in production: npm start\n\nEnvironment variables\n1) TELEGRAM_BOT_TOKEN (required) Telegram bot token\n2) COOKMYBOTS_AI_ENDPOINT (required) CookMyBots AI Gateway base URL (must NOT include /chat)\n3) COOKMYBOTS_AI_KEY (required) CookMyBots AI Gateway key\n4) MONGODB_URI (optional) Enables long-term memory storage in MongoDB. If missing, the bot uses an in-memory fallback.\n5) AI_TIMEOUT_MS (optional) AI request timeout in ms. Default 600000.\n6) AI_MAX_RETRIES (optional) Retries for transient AI errors. Default 2.\n7) CONCURRENCY (optional) grammY runner concurrency. Default 1.\n8) GLOBAL_INFLIGHT_CAP (optional) Max simultaneous roasts in the process. Default 2.\n\nCommands\n1) /start: what to send and how scoring works\n2) /help: examples of good submissions and what you’ll get back\n3) /reset: clear your stored memory for this chat\n\nTypical usage\nSend 2–8 sentences about your project plus an optional link. If a link is present, Roast Critic will focus more on positioning and UX: headline, clarity, CTA, trust signals, and friction.\n\nNotes on reliability\nThe bot uses long polling via @grammyjs/runner with concurrency=1, clears any webhook at boot, and retries on Telegram 409 conflicts. It includes per-user in-flight locks and a small global cap to prevent memory build-up.\n"
+            "content": "Roast My Project is a Telegram bot that gives VC-style, analytical roasts of startup ideas and landing pages. Users paste a short description (and optionally a URL) and the bot replies with a compact investor-style evaluation and a 1–10 Roast Score.\n\nSetup\n1) Install dependencies: npm install\n2) Create a .env file (or set env vars in your host) using .env.sample as a reference\n3) Run locally: npm run dev\n4) Run in production: npm start\n\nEnvironment variables\n1) TELEGRAM_BOT_TOKEN (required) Telegram bot token\n2) COOKMYBOTS_AI_ENDPOINT (required) CookMyBots AI Gateway base URL (must NOT include /chat)\n3) COOKMYBOTS_AI_KEY (required) CookMyBots AI Gateway key\n4) MONGODB_URI (optional) Enables long-term memory storage in MongoDB. If missing, the bot uses an in-memory fallback.\n5) AI_TIMEOUT_MS (optional) AI request timeout in ms. Default 600000.\n\nCommands\n1) /start: what to send and how scoring works\n2) /help: examples of good submissions and what you’ll get back\n3) /reset: clear your stored memory for this chat\n\nOutput format (short-form)\nEvery response follows this order:\n1) Verdict: Pass/Watch/Lean Yes/Yes + biggest reason\n2) Roast Score: 1–10\n3) TAM snapshot (TAM/SAM/SOM framing)\n4) Unit economics & CAC reality check\n5) Moat & differentiation\n6) GTM wedge\n7) Red flags (up to 3)\n8) Next steps (2 concrete actions)\n\nNotes on reliability\nThe bot uses long polling via @grammyjs/runner with concurrency=1, clears any webhook at boot, and retries on Telegram 409 conflicts. It includes per-user in-flight locks and a small global cap to prevent memory build-up.\n"
           },
           "package.json": {
             "type": "file",
@@ -399,7 +408,7 @@
                 "children": {
                   "help.js": {
                     "type": "file",
-                    "content": "export default function register(bot) {\n  bot.command(\"help\", async (ctx) => {\n    await ctx.reply(\n      [\n        \"Send a short project description and I’ll reply with a structured roast and a 1–10 score.\",\n        \"\",\n        \"Good submission examples:\",\n        \"1) “We’re building payroll for 20–50 person startups. Setup takes 10 minutes. We charge $99/month. Our edge is instant onboarding via bank sync.”\",\n        \"2) “Landing page copy: Headline: ‘Plan trips in minutes.’ Subhead: ‘AI itinerary with real-time prices.’ CTA: ‘Get my itinerary’. https://example.com”\",\n        \"\",\n        \"What you’ll get back (in order): first impression, problem clarity, differentiation, business model realism, target market focus, biggest red flag, 3–5 concrete improvements, Roast Score (1–10), mic-drop closing line.\",\n        \"\",\n        \"Need a fresh slate? Use /reset to clear your stored memory.\",\n      ].join(\"\\n\")\n    );\n  });\n}\n"
+                    "content": "export default function register(bot) {\n  bot.command(\"help\", async (ctx) => {\n    await ctx.reply(\n      [\n        \"Send a short project description and I’ll reply in a compact VC-style format.\",\n        \"\",\n        \"Good submission examples:\",\n        \"1) “We sell compliance automation to dental clinics. $299/mo per location. Acquisition via partnerships with practice management software consultants. Early: 12 paying customers.”\",\n        \"2) “B2B: AI inbox triage for customer support teams. ICP: 50–500 seat SaaS. Pricing: $40/agent/mo. Channel: app marketplace + outbound to support leaders. https://example.com”\",\n        \"\",\n        \"What you’ll get back:\",\n        \"Verdict, Roast Score (1–10), TAM snapshot, unit economics & CAC check, moat, GTM wedge, up to 3 red flags, and 2 next steps.\",\n        \"\",\n        \"If you leave out critical info (buyer, pricing, channel, usage frequency, traction), I’ll ask up to 2 questions.\",\n        \"Need a fresh slate? Use /reset.\",\n      ].join(\"\\n\")\n    );\n  });\n}\n"
                   },
                   "loader.js": {
                     "type": "file",
@@ -411,7 +420,7 @@
                   },
                   "start.js": {
                     "type": "file",
-                    "content": "export default function register(bot) {\n  bot.command(\"start\", async (ctx) => {\n    await ctx.reply(\n      [\n        \"Roast Critic is a brutally honest but constructive startup critic.\",\n        \"Send me 2–8 sentences about your project (what it is, who it’s for, what pain it solves), and optionally a URL.\",\n        \"I’ll roast the idea, not you: savage about the product, respectful to the person.\",\n        \"\",\n        \"Roast Score is 1–10.\",\n        \"1 = This will die quietly\",\n        \"10 = Annoyingly good idea\",\n      ].join(\"\\n\")\n    );\n  });\n}\n"
+                    "content": "export default function register(bot) {\n  bot.command(\"start\", async (ctx) => {\n    await ctx.reply(\n      [\n        \"Roast My Project gives VC-style, analytical roasts of startup ideas and landing pages.\",\n        \"Send 2–8 sentences: what it is, who buys, pricing idea, and how you’ll acquire users. Add a URL if you have one.\",\n        \"I’ll be blunt about the business, respectful to you.\",\n        \"\",\n        \"Roast Score is 1–10 (investor-relevant).\",\n        \"1 = not fundable as described\",\n        \"10 = unusually strong for stage\",\n        \"\",\n        \"Commands: /help for examples, /reset to clear memory.\",\n      ].join(\"\\n\")\n    );\n  });\n}\n"
                   }
                 }
               },
@@ -420,7 +429,7 @@
                 "children": {
                   "agent.js": {
                     "type": "file",
-                    "content": "import { cfg } from \"../lib/config.js\";\nimport { aiChat, extractChatContent } from \"../lib/ai.js\";\nimport { addTurn, getRecentTurns } from \"../lib/memory.js\";\nimport { buildBotProfile } from \"../lib/botProfile.js\";\nimport { safeErr } from \"../lib/safeErr.js\";\n\nconst inflightByKey = new Map();\nlet globalInflight = 0;\n\nfunction clampText(s, maxChars) {\n  const t = String(s || \"\").trim();\n  if (t.length <= maxChars) return t;\n  return t.slice(0, maxChars) + \"…\";\n}\n\nfunction extractUrl(text) {\n  const t = String(text || \"\");\n  const m = t.match(/https?:\\/\\/[^\\s)\\]}>,\"']+/i);\n  return m ? m[0] : \"\";\n}\n\nfunction wordCount(text) {\n  return String(text || \"\")\n    .trim()\n    .split(/\\s+/)\n    .filter(Boolean).length;\n}\n\nfunction keyFor(ctx) {\n  const userId = String(ctx.from?.id || \"\");\n  const chatId = String(ctx.chat?.id || \"\");\n  return userId ? `u:${userId}` : `c:${chatId}`;\n}\n\nfunction buildSystemPrompt({ hasUrl }) {\n  const profile = buildBotProfile();\n  const extra = hasUrl\n    ? \"\\n\\nExtra instruction: The user included a URL. Make sure your critique explicitly covers UX and positioning (headline strength, messaging clarity, CTA effectiveness, trust signals, friction), even if you can't browse the page.\"\n    : \"\";\n\n  const style = [\n    \"Style constraints:\",\n    \"1) Witty and blunt, but not mean.\",\n    \"2) No insults about the user. No protected-class content.\",\n    \"3) Keep it under 500 words total.\",\n    \"4) Be specific and concrete in improvements.\",\n  ].join(\"\\n\");\n\n  return profile + \"\\n\\n\" + style + extra;\n}\n\nexport function registerAgent(bot) {\n  bot.on(\"message:text\", async (ctx, next) => {\n    const raw = ctx.message?.text || \"\";\n    if (raw.startsWith(\"/\")) return next();\n\n    const k = keyFor(ctx);\n\n    if (inflightByKey.get(k)) {\n      await ctx.reply(\"I’m still roasting your last one—give me a sec.\");\n      return;\n    }\n\n    const cap = Number.isFinite(cfg.GLOBAL_INFLIGHT_CAP) ? cfg.GLOBAL_INFLIGHT_CAP : 2;\n    if (globalInflight >= Math.max(1, cap)) {\n      await ctx.reply(\"Busy, try again in a moment.\");\n      return;\n    }\n\n    inflightByKey.set(k, true);\n    globalInflight++;\n\n    try {\n      const userId = String(ctx.from?.id || \"\");\n      const chatId = String(ctx.chat?.id || \"\");\n\n      const url = extractUrl(raw);\n      const hasUrl = !!url;\n\n      const userText = clampText(raw, 6000);\n\n      await addTurn({\n        mongoUri: cfg.MONGODB_URI,\n        platform: \"telegram\",\n        userId,\n        chatId,\n        role: \"user\",\n        text: userText,\n      });\n\n      const history = await getRecentTurns({\n        mongoUri: cfg.MONGODB_URI,\n        platform: \"telegram\",\n        userId,\n        chatId,\n        limit: 18,\n      });\n\n      const botProfile = buildBotProfile();\n      const system = buildSystemPrompt({ hasUrl });\n\n      const messages = [\n        { role: \"system\", content: system },\n        { role: \"system\", content: \"Bot Profile:\\n\" + botProfile },\n        ...history.map((m) => ({\n          role: m.role === \"assistant\" ? \"assistant\" : \"user\",\n          content: clampText(m.text, 2000),\n        })),\n        {\n          role: \"user\",\n          content:\n            (hasUrl\n              ? `Submission (includes URL: ${url}):\\n${userText}`\n              : `Submission:\\n${userText}`) +\n            \"\\n\\nReturn the roast in the exact required section order.\",\n        },\n      ];\n\n      const res = await aiChat(\n        cfg,\n        {\n          messages,\n          meta: {\n            platform: \"telegram\",\n            userId,\n            chatId,\n            feature: \"roast\",\n            hasUrl,\n          },\n        },\n        { timeoutMs: cfg.AI_TIMEOUT_MS, retries: cfg.AI_MAX_RETRIES }\n      );\n\n      if (!res.ok) {\n        console.log(\"[agent] ai failed\", { status: res.status, err: res.error });\n        await ctx.reply(\"I couldn’t finish the roast right now. Try again in a bit.\");\n        return;\n      }\n\n      let out = extractChatContent(res.json);\n      if (!out) {\n        console.log(\"[agent] ai missing output\", { keys: Object.keys(res.json || {}) });\n        await ctx.reply(\"I got an empty roast back. Try again with a bit more detail.\");\n        return;\n      }\n\n      // Enforce: under 500 words (soft clamp)\n      if (wordCount(out) > 500) {\n        out = out\n          .split(/\\s+/)\n          .slice(0, 500)\n          .join(\" \")\n          .trim();\n        out = out + \"\\n\\n(Trimmed to 500 words.)\";\n      }\n\n      await addTurn({\n        mongoUri: cfg.MONGODB_URI,\n        platform: \"telegram\",\n        userId,\n        chatId,\n        role: \"assistant\",\n        text: out,\n      });\n\n      await ctx.reply(out);\n    } catch (e) {\n      console.log(\"[agent] handler error\", { err: safeErr(e) });\n      await ctx.reply(\"Something went wrong. Try again in a moment.\");\n    } finally {\n      inflightByKey.delete(k);\n      globalInflight = Math.max(0, globalInflight - 1);\n    }\n  });\n}\n"
+                    "content": "import { cfg } from \"../lib/config.js\";\nimport { aiChat, extractChatContent } from \"../lib/ai.js\";\nimport { addTurn, getRecentTurns } from \"../lib/memory.js\";\nimport { buildBotProfile } from \"../lib/botProfile.js\";\nimport { safeErr } from \"../lib/safeErr.js\";\n\nconst inflightByKey = new Map();\nlet globalInflight = 0;\n\nfunction clampText(s, maxChars) {\n  const t = String(s || \"\").trim();\n  if (t.length <= maxChars) return t;\n  return t.slice(0, maxChars) + \"…\";\n}\n\nfunction extractUrl(text) {\n  const t = String(text || \"\");\n  const m = t.match(/https?:\\/\\/[^\\s)\\]}>,\"']+/i);\n  return m ? m[0] : \"\";\n}\n\nfunction keyFor(ctx) {\n  const userId = String(ctx.from?.id || \"\");\n  const chatId = String(ctx.chat?.id || \"\");\n  return userId ? `u:${userId}` : `c:${chatId}`;\n}\n\nfunction truncateAtParagraphBoundary(text, maxChars) {\n  const t = String(text || \"\").trim();\n  if (t.length <= maxChars) return t;\n\n  const slice = t.slice(0, maxChars);\n  const idx = Math.max(slice.lastIndexOf(\"\\n\\n\"), slice.lastIndexOf(\"\\n\"));\n\n  if (idx > Math.floor(maxChars * 0.6)) {\n    return slice.slice(0, idx).trim() + \"\\n\\n(Trimmed.)\";\n  }\n\n  const idx2 = Math.max(slice.lastIndexOf(\". \"), slice.lastIndexOf(\".\\n\"), slice.lastIndexOf(\"; \"));\n  if (idx2 > Math.floor(maxChars * 0.6)) {\n    return slice.slice(0, idx2 + 1).trim() + \" (Trimmed.)\";\n  }\n\n  return slice.trim() + \"…\";\n}\n\nfunction buildSystemPrompt({ hasUrl }) {\n  const botProfile = buildBotProfile();\n\n  const style = [\n    \"You are a VC/investor doing a fast, high-signal evaluation.\",\n    \"Be crisp, analytical, and slightly blunt about the business. Always respectful to the person.\",\n    \"Plain text only. No markdown.\",\n    \"Default to short output that fits a quick Telegram read.\",\n    \"If critical info is missing that blocks TAM/CAC/moat assessment, ask at most 2 questions at the end.\",\n    \"Do not ask questions unless it materially changes the evaluation.\",\n    \"\",\n    \"You MUST follow the required output structure exactly and keep each section short.\",\n    \"Red flags: up to 3 items max.\",\n    \"Next steps: exactly 2 actions.\",\n  ].join(\"\\n\");\n\n  const linkNote = hasUrl\n    ? \"\\n\\nUser included a URL. You may comment on positioning/landing-page clarity, but do not claim you browsed the page unless the user explicitly pasted content.\"\n    : \"\";\n\n  return botProfile + \"\\n\\n\" + style + linkNote;\n}\n\nexport function registerAgent(bot) {\n  bot.on(\"message:text\", async (ctx, next) => {\n    const raw = ctx.message?.text || \"\";\n    if (raw.startsWith(\"/\")) return next();\n\n    const k = keyFor(ctx);\n\n    if (inflightByKey.get(k)) {\n      await ctx.reply(\"I’m working on your last one—give me a sec.\");\n      return;\n    }\n\n    const cap = Number.isFinite(cfg.GLOBAL_INFLIGHT_CAP) ? cfg.GLOBAL_INFLIGHT_CAP : 2;\n    if (globalInflight >= Math.max(1, cap)) {\n      await ctx.reply(\"Busy, try again in a moment.\");\n      return;\n    }\n\n    inflightByKey.set(k, true);\n    globalInflight++;\n\n    try {\n      const userId = String(ctx.from?.id || \"\");\n      const chatId = String(ctx.chat?.id || \"\");\n\n      const url = extractUrl(raw);\n      const hasUrl = !!url;\n\n      const userText = clampText(raw, 6000);\n\n      await addTurn({\n        mongoUri: cfg.MONGODB_URI,\n        platform: \"telegram\",\n        userId,\n        chatId,\n        role: \"user\",\n        text: userText,\n      });\n\n      const history = await getRecentTurns({\n        mongoUri: cfg.MONGODB_URI,\n        platform: \"telegram\",\n        userId,\n        chatId,\n        limit: 18,\n      });\n\n      const system = buildSystemPrompt({ hasUrl });\n\n      const messages = [\n        { role: \"system\", content: system },\n        ...history.map((m) => ({\n          role: m.role === \"assistant\" ? \"assistant\" : \"user\",\n          content: clampText(m.text, 1600),\n        })),\n        {\n          role: \"user\",\n          content:\n            (hasUrl\n              ? `Submission (includes URL: ${url}):\\n${userText}`\n              : `Submission:\\n${userText}`) +\n            \"\\n\\nRespond using the required short-form VC structure.\",\n        },\n      ];\n\n      const res = await aiChat(\n        cfg,\n        {\n          messages,\n          meta: {\n            platform: \"telegram\",\n            userId,\n            chatId,\n            feature: \"vc_roast\",\n            hasUrl,\n          },\n        },\n        { timeoutMs: cfg.AI_TIMEOUT_MS, retries: cfg.AI_MAX_RETRIES }\n      );\n\n      if (!res.ok) {\n        console.log(\"[agent] ai failed\", { status: res.status, err: res.error });\n        await ctx.reply(\"I couldn’t finish the analysis right now. Try again in a bit.\");\n        return;\n      }\n\n      let out = extractChatContent(res.json);\n      if (!out) {\n        console.log(\"[agent] ai missing output\", { keys: Object.keys(res.json || {}) });\n        await ctx.reply(\"I got an empty response back. Try again with a bit more detail.\");\n        return;\n      }\n\n      const maxChars = Number(process.env.AI_SHORT_MAX_CHARS || 1600);\n      out = truncateAtParagraphBoundary(out, Number.isFinite(maxChars) && maxChars > 300 ? maxChars : 1600);\n\n      await addTurn({\n        mongoUri: cfg.MONGODB_URI,\n        platform: \"telegram\",\n        userId,\n        chatId,\n        role: \"assistant\",\n        text: out,\n      });\n\n      await ctx.reply(out);\n    } catch (e) {\n      console.log(\"[agent] handler error\", { err: safeErr(e) });\n      await ctx.reply(\"Something went wrong. Try again in a moment.\");\n    } finally {\n      inflightByKey.delete(k);\n      globalInflight = Math.max(0, globalInflight - 1);\n    }\n  });\n}\n"
                   }
                 }
               },
@@ -437,7 +446,7 @@
                   },
                   "botProfile.js": {
                     "type": "file",
-                    "content": "export function buildBotProfile() {\n  return [\n    \"You are Roast Critic, a Telegram bot that gives brutally honest but constructive feedback on startup ideas and landing page copy.\",\n    \"You are sharp and witty, slightly savage about the idea, and always respectful to the person.\",\n    \"Keep the full response under 500 words.\",\n    \"\",\n    \"Public commands:\",\n    \"1) /start: what to submit and how scoring works\",\n    \"2) /help: examples and what the roast contains\",\n    \"3) /reset: clear this user's stored memory\",\n    \"\",\n    \"Behavior rules:\",\n    \"1) If the user includes a URL, focus extra on UX and positioning: headline strength, messaging clarity, CTA effectiveness, trust signals, and obvious friction.\",\n    \"2) Never generate harassment, slurs, or protected-class insults. No personal attacks. Critique the product, not the founder.\",\n    \"3) If the user asks for toxic content, briefly refuse that part and continue with a constructive roast.\",\n    \"\",\n    \"Output format: You MUST include these sections in this exact order:\",\n    \"1) Strong first impression (1–3 sentences)\",\n    \"2) Problem clarity assessment\",\n    \"3) Differentiation assessment\",\n    \"4) Business model realism\",\n    \"5) Target market focus\",\n    \"6) Single biggest red flag (one paragraph)\",\n    \"7) 3–5 specific and actionable improvements (concrete, not generic)\",\n    \"8) Roast Score (1–10) where 1 = This will die quietly and 10 = Annoyingly good idea\",\n    \"9) Mic-drop closing line (one sentence)\",\n  ].join(\"\\n\");\n}\n"
+                    "content": "export function buildBotProfile() {\n  return [\n    \"You are Roast My Project, a Telegram bot that gives VC-style, analytical roasts of startup ideas and landing pages.\",\n    \"Tone: crisp, investor-brain, slightly blunt about the business, always respectful to the person.\",\n    \"Default output is short and high-signal for quick Telegram reading.\",\n    \"\",\n    \"Public commands:\",\n    \"1) /start: instructions on what to submit + what the Roast Score means\",\n    \"2) /help: examples of good submissions + what the output includes\",\n    \"3) /reset: clears your stored memory for this chat\",\n    \"\",\n    \"Behavior rules:\",\n    \"1) Only respond to non-command text. If a message starts with '/', do not answer it as chat.\",\n    \"2) Never insult the user or use harassment/slurs. Critique the business, not the founder.\",\n    \"3) If key info is missing that blocks TAM/CAC/moat evaluation, ask at most 2 questions at the end.\",\n    \"\",\n    \"Required output structure for every response (keep it compact):\",\n    \"1) Verdict: Pass/Watch/Lean Yes/Yes + single biggest reason (one line)\",\n    \"2) Roast Score: 1–10 (investor-relevant)\",\n    \"3) TAM snapshot: 1–2 lines using TAM/SAM/SOM logic\",\n    \"4) Unit economics & CAC reality check: 2–3 lines max (CAC drivers, payback intuition, LTV drivers, sales-led vs product-led vs channel-led)\",\n    \"5) Moat & differentiation: 1–2 lines (data, distribution, switching costs, network effects, regulatory, brand) or why it’s copyable\",\n    \"6) GTM wedge: 1–2 lines (first ICP + channel + wedge)\",\n    \"7) Red flags: up to 3 short items\",\n    \"8) Next steps: 2 concrete actions\",\n  ].join(\"\\n\");\n}\n"
                   },
                   "config.js": {
                     "type": "file",
@@ -449,7 +458,7 @@
                   },
                   "memory.js": {
                     "type": "file",
-                    "content": "import { getDb } from \"./db.js\";\nimport { safeErr } from \"./safeErr.js\";\n\nconst COL = \"memory_messages\";\n\n// In-memory fallback (bounded)\nconst MAX_MEM_TURNS_PER_USER = 40;\nconst mem = new Map(); // key: platform:userId[:chatId]\n\nfunction keyOf({ platform, userId, chatId }) {\n  const p = String(platform || \"\");\n  const u = String(userId || \"\");\n  const c = chatId ? String(chatId) : \"\";\n  return c ? `${p}:${u}:${c}` : `${p}:${u}`;\n}\n\nexport async function ensureMemoryIndexes(mongoUri) {\n  const db = await getDb(mongoUri);\n  if (!db) return;\n  try {\n    await db.collection(COL).createIndex({ platform: 1, userId: 1, ts: -1 });\n    await db.collection(COL).createIndex({ platform: 1, userId: 1, chatId: 1, ts: -1 });\n  } catch (e) {\n    console.log(\"[db] ensureIndexes failed\", { col: COL, err: safeErr(e) });\n  }\n}\n\nexport async function addTurn({ mongoUri, platform, userId, chatId, role, text }) {\n  const doc = {\n    platform: String(platform || \"telegram\"),\n    userId: String(userId || \"\"),\n    chatId: chatId ? String(chatId) : \"\",\n    role: role === \"assistant\" ? \"assistant\" : \"user\",\n    text: String(text || \"\").slice(0, 6000),\n    ts: new Date(),\n  };\n\n  const db = await getDb(mongoUri);\n  if (!db) {\n    const k = keyOf(doc);\n    const arr = mem.get(k) || [];\n    arr.push({ role: doc.role, text: doc.text, ts: doc.ts });\n    while (arr.length > MAX_MEM_TURNS_PER_USER) arr.shift();\n    mem.set(k, arr);\n    return;\n  }\n\n  try {\n    await db.collection(COL).insertOne(doc);\n  } catch (e) {\n    console.log(\"[db] insertOne failed\", { col: COL, err: safeErr(e) });\n  }\n}\n\nexport async function getRecentTurns({ mongoUri, platform, userId, chatId, limit = 16 }) {\n  const lim = Math.max(1, Math.min(Number(limit || 16), 20));\n\n  const db = await getDb(mongoUri);\n  if (!db) {\n    const k = keyOf({ platform, userId, chatId });\n    const arr = mem.get(k) || [];\n    return arr.slice(-lim).map((t) => ({ role: t.role, text: t.text }));\n  }\n\n  const q = { platform: String(platform || \"telegram\"), userId: String(userId || \"\") };\n  if (chatId) q.chatId = String(chatId);\n\n  try {\n    const rows = await db.collection(COL).find(q).sort({ ts: -1 }).limit(lim).toArray();\n    return rows.reverse().map((r) => ({ role: r.role, text: r.text }));\n  } catch (e) {\n    console.log(\"[db] find failed\", { col: COL, err: safeErr(e) });\n    return [];\n  }\n}\n\nexport async function clearUserMemory({ mongoUri, platform, userId, chatId }) {\n  const db = await getDb(mongoUri);\n  if (!db) {\n    mem.delete(keyOf({ platform, userId, chatId }));\n    // Also clear key without chatId to be safe\n    mem.delete(keyOf({ platform, userId, chatId: \"\" }));\n    return;\n  }\n\n  const q = { platform: String(platform || \"telegram\"), userId: String(userId || \"\") };\n  if (chatId) q.chatId = String(chatId);\n\n  try {\n    await db.collection(COL).deleteMany(q);\n  } catch (e) {\n    console.log(\"[db] deleteMany failed\", { col: COL, err: safeErr(e) });\n  }\n}\n"
+                    "content": "import { getDb } from \"./db.js\";\nimport { safeErr } from \"./safeErr.js\";\n\nconst COL = \"memory_messages\";\n\n// In-memory fallback (bounded)\nconst MAX_MEM_TURNS_PER_USER = 40;\nconst mem = new Map(); // key: platform:userId[:chatId]\n\nfunction keyOf({ platform, userId, chatId }) {\n  const p = String(platform || \"\");\n  const u = String(userId || \"\");\n  const c = chatId ? String(chatId) : \"\";\n  return c ? `${p}:${u}:${c}` : `${p}:${u}`;\n}\n\nfunction looksLikeSecret(s) {\n  const t = String(s || \"\");\n  if (!t) return false;\n  if (t.length > 20000) return true;\n  return (\n    /api[_-]?key\\s*[:=]/i.test(t) ||\n    /secret\\s*[:=]/i.test(t) ||\n    /password\\s*[:=]/i.test(t) ||\n    /bearer\\s+[a-z0-9\\-_.=]+/i.test(t) ||\n    /sk-[a-z0-9]{10,}/i.test(t) ||\n    /xox[baprs]-/i.test(t) ||\n    /-----BEGIN [A-Z ]+PRIVATE KEY-----/i.test(t)\n  );\n}\n\nfunction redactSecrets(text) {\n  let t = String(text || \"\");\n  if (!t) return t;\n\n  t = t.replace(/(authorization\\s*:\\s*bearer\\s+)[^\\s]+/gi, \"$1[REDACTED]\");\n  t = t.replace(/(bearer\\s+)[a-z0-9\\-_.=]+/gi, \"$1[REDACTED]\");\n  t = t.replace(/sk-[a-z0-9]{10,}/gi, \"sk-[REDACTED]\");\n  t = t.replace(/(api[_-]?key\\s*[:=]\\s*)[^\\s]+/gi, \"$1[REDACTED]\");\n  t = t.replace(/(password\\s*[:=]\\s*)[^\\s]+/gi, \"$1[REDACTED]\");\n  t = t.replace(/-----BEGIN [A-Z ]+PRIVATE KEY-----[\\s\\S]*?-----END [A-Z ]+PRIVATE KEY-----/g, \"[REDACTED_PRIVATE_KEY]\");\n\n  return t;\n}\n\nexport async function ensureMemoryIndexes(mongoUri) {\n  const db = await getDb(mongoUri);\n  if (!db) return;\n  try {\n    await db.collection(COL).createIndex({ platform: 1, userId: 1, ts: -1 });\n    await db.collection(COL).createIndex({ platform: 1, userId: 1, chatId: 1, ts: -1 });\n  } catch (e) {\n    console.log(\"[db] ensureIndexes failed\", { col: COL, err: safeErr(e) });\n  }\n}\n\nexport async function addTurn({ mongoUri, platform, userId, chatId, role, text }) {\n  let safeText = String(text || \"\");\n  if (looksLikeSecret(safeText)) safeText = redactSecrets(safeText);\n\n  const doc = {\n    platform: String(platform || \"telegram\"),\n    userId: String(userId || \"\"),\n    chatId: chatId ? String(chatId) : \"\",\n    role: role === \"assistant\" ? \"assistant\" : \"user\",\n    text: safeText.slice(0, 6000),\n    ts: new Date(),\n  };\n\n  const db = await getDb(mongoUri);\n  if (!db) {\n    const k = keyOf(doc);\n    const arr = mem.get(k) || [];\n    arr.push({ role: doc.role, text: doc.text, ts: doc.ts });\n    while (arr.length > MAX_MEM_TURNS_PER_USER) arr.shift();\n    mem.set(k, arr);\n    return;\n  }\n\n  try {\n    await db.collection(COL).insertOne(doc);\n  } catch (e) {\n    console.log(\"[db] insertOne failed\", { col: COL, err: safeErr(e) });\n  }\n}\n\nexport async function getRecentTurns({ mongoUri, platform, userId, chatId, limit = 16 }) {\n  const lim = Math.max(1, Math.min(Number(limit || 16), 20));\n\n  const db = await getDb(mongoUri);\n  if (!db) {\n    const k = keyOf({ platform, userId, chatId });\n    const arr = mem.get(k) || [];\n    return arr.slice(-lim).map((t) => ({ role: t.role, text: t.text }));\n  }\n\n  const q = { platform: String(platform || \"telegram\"), userId: String(userId || \"\") };\n  if (chatId) q.chatId = String(chatId);\n\n  try {\n    const rows = await db.collection(COL).find(q).sort({ ts: -1 }).limit(lim).toArray();\n    return rows.reverse().map((r) => ({ role: r.role, text: r.text }));\n  } catch (e) {\n    console.log(\"[db] find failed\", { col: COL, err: safeErr(e) });\n    return [];\n  }\n}\n\nexport async function clearUserMemory({ mongoUri, platform, userId, chatId }) {\n  const db = await getDb(mongoUri);\n  if (!db) {\n    mem.delete(keyOf({ platform, userId, chatId }));\n    mem.delete(keyOf({ platform, userId, chatId: \"\" }));\n    return;\n  }\n\n  const q = { platform: String(platform || \"telegram\"), userId: String(userId || \"\") };\n  if (chatId) q.chatId = String(chatId);\n\n  try {\n    await db.collection(COL).deleteMany(q);\n  } catch (e) {\n    console.log(\"[db] deleteMany failed\", { col: COL, err: safeErr(e) });\n  }\n}\n"
                   },
                   "safeErr.js": {
                     "type": "file",
@@ -463,33 +472,33 @@
         "commands": [
           {
             "command": "/help",
-            "description": "Shows examples of good submissions and explains the roast output sections and score.",
+            "description": "Shows examples of good submissions and explains the short-form VC output sections.",
             "usage": "/help",
             "examples": [
-              "User: /help → Bot: Example submissions and what the response will include."
+              "User: /help → Bot: Example submissions + what the output includes (verdict, TAM, CAC, moat, GTM)."
             ],
-            "example": "User: /help → Bot: Example submissions and what the response will include.",
-            "notes": "Good for learning what details to include (ICP, pricing idea, link)."
+            "example": "User: /help → Bot: Example submissions + what the output includes (verdict, TAM, CAC, moat, GTM).",
+            "notes": "If critical info is missing, the bot may ask up to 2 questions at the end."
           },
           {
             "command": "/reset",
-            "description": "Clears your stored conversation memory for this chat.",
+            "description": "Clears your stored conversation memory for this chat (MongoDB if configured, otherwise in-memory fallback).",
             "usage": "/reset",
             "examples": [
               "User: /reset → Bot: Done. I’ve cleared your memory for this chat."
             ],
             "example": "User: /reset → Bot: Done. I’ve cleared your memory for this chat.",
-            "notes": "If MongoDB is not configured, this clears in-memory fallback instead."
+            "notes": "Use this if the bot’s context feels off or you’re switching to a new project."
           },
           {
             "command": "/start",
-            "description": "Explains what Roast Critic does, what to submit, and the 1–10 Roast Score scale.",
+            "description": "Explains what to submit for a VC-style roast and what the 1–10 Roast Score means.",
             "usage": "/start",
             "examples": [
-              "User: /start → Bot: Instructions on what to submit and how scoring works."
+              "User: /start → Bot: Tells you what details to include (ICP, pricing, channel) and what the score represents."
             ],
-            "example": "User: /start → Bot: Instructions on what to submit and how scoring works.",
-            "notes": "Style boundary: savage about the idea, respectful to the person."
+            "example": "User: /start → Bot: Tells you what details to include (ICP, pricing, channel) and what the score represents.",
+            "notes": "Send a short description; include buyer, pricing, and acquisition channel if you want the sharpest output."
           }
         ],
         "envVarDocs": [
@@ -507,7 +516,7 @@
             "key": "COOKMYBOTS_AI_ENDPOINT",
             "title": "CookMyBots AI Endpoint",
             "description": "Base URL for the CookMyBots AI Gateway. Must be a base URL (no /chat suffix).",
-            "usage": "The bot calls POST {COOKMYBOTS_AI_ENDPOINT}/chat for roasts.",
+            "usage": "The bot calls POST {COOKMYBOTS_AI_ENDPOINT}/chat.",
             "howToGet": "Provided in CookMyBots project settings.",
             "example": "https://api.cookmybots.com/api/ai",
             "isSecret": false,
@@ -526,8 +535,8 @@
           {
             "key": "MONGODB_URI",
             "title": "MongoDB Connection URI",
-            "description": "Optional. Enables long-term memory storage in the memory_messages collection. If missing, the bot uses an in-memory fallback and logs a warning.",
-            "usage": "MongoDB is used to store and retrieve the last 10–20 turns for context and to support /reset.",
+            "description": "Enables long-term memory in the memory_messages collection. If missing, the bot falls back to in-memory memory and still supports /reset.",
+            "usage": "Stores conversation turns and retrieves the most recent 10–20 turns for context.",
             "howToGet": "Create a MongoDB database (e.g., MongoDB Atlas) and copy the connection string.",
             "example": "mongodb+srv://user:pass@cluster.example.mongodb.net/dbname",
             "isSecret": true,
@@ -536,8 +545,8 @@
           {
             "key": "AI_TIMEOUT_MS",
             "title": "AI Timeout",
-            "description": "Optional. Timeout in milliseconds for CookMyBots AI calls.",
-            "usage": "Used by the AI gateway client to abort slow requests.",
+            "description": "Timeout in milliseconds for AI gateway calls.",
+            "usage": "Used in src/lib/ai.js via AbortController to stop slow requests.",
             "howToGet": "Set manually (optional).",
             "example": "600000",
             "isSecret": false,
@@ -557,30 +566,30 @@
         "commandDocs": [
           {
             "command": "/start",
-            "description": "Explains what Roast Critic does, what to submit, and the 1–10 Roast Score scale.",
+            "description": "Explains what to submit for a VC-style roast and what the 1–10 Roast Score means.",
             "usage": "/start",
             "examples": [
-              "User: /start → Bot: Instructions on what to submit and how scoring works."
+              "User: /start → Bot: Tells you what details to include (ICP, pricing, channel) and what the score represents."
             ],
-            "notes": "Style boundary: savage about the idea, respectful to the person."
+            "notes": "Send a short description; include buyer, pricing, and acquisition channel if you want the sharpest output."
           },
           {
             "command": "/help",
-            "description": "Shows examples of good submissions and explains the roast output sections and score.",
+            "description": "Shows examples of good submissions and explains the short-form VC output sections.",
             "usage": "/help",
             "examples": [
-              "User: /help → Bot: Example submissions and what the response will include."
+              "User: /help → Bot: Example submissions + what the output includes (verdict, TAM, CAC, moat, GTM)."
             ],
-            "notes": "Good for learning what details to include (ICP, pricing idea, link)."
+            "notes": "If critical info is missing, the bot may ask up to 2 questions at the end."
           },
           {
             "command": "/reset",
-            "description": "Clears your stored conversation memory for this chat.",
+            "description": "Clears your stored conversation memory for this chat (MongoDB if configured, otherwise in-memory fallback).",
             "usage": "/reset",
             "examples": [
               "User: /reset → Bot: Done. I’ve cleared your memory for this chat."
             ],
-            "notes": "If MongoDB is not configured, this clears in-memory fallback instead."
+            "notes": "Use this if the bot’s context feels off or you’re switching to a new project."
           }
         ],
         "aiMessages": [
@@ -591,6 +600,16 @@
           {
             "role": "assistant",
             "content": "Created Roast Critic as a full Telegram bot with command modules (/start, /help, /reset) registered via a loader, and an AI roast agent in src/features/agent.js registered after commands. Added CookMyBots AI Gateway client (src/lib/ai.js) with start/success/failure logs and timeout, MongoDB-backed long-term memory (memory_messages) with in-memory fallback, Bot Profile injection into every AI request, and production-safe polling via @grammyjs/runner with deleteWebhook, 409 conflict backoff, process-level crash guards, and in-flight locks/backpressure.\n\nFiles touched (17): .env.sample, DOCS.md, README.md, package.json, src/bot.js, src/commands/help.js…\nValidation: ✅ project passes syntax/basic checks after this edit."
+          },
+          {
+            "role": "user",
+            "content": "upgrade and Make it more investor-style (VC tone) Make it more analytical (TAM, CAC, moat focus), Shorten it for faster Telegram responses"
+          },
+          {
+            "role": "assistant",
+            "content": "Upgraded the agent to a compact VC-style analytical roast with the required short-form structure (verdict, investor-relevant score, TAM, CAC/unit economics, moat, GTM wedge, red flags, next steps). Updated Bot Profile injection accordingly, shortened /start and /help guidance to match, added a hard character cap with safe truncation, and added secret redaction before storing memory. README/DOCS/.env.sample were updated to reflect the new positioning and output format. Command routing and reliability behaviors were preserved (commands still registered before the catch-all, and slash commands always pass through).\n\nFiles touched (9): .env.sample, DOCS.md, README.md, package.json, src/commands/help.js, src/commands/start.js…\nValidation: ✅ project passes syntax/basic checks after this edit.",
+            "gitBeforeSha": "803ab4a6c2ec0ba51f7ca0a2c510fd19240924c4",
+            "gitAfterSha": "24bbe9dac321b68825fb49c30c55ad996378ac48"
           }
         ],
         "createdBy": "",
@@ -605,31 +624,31 @@
           "techStack": "Runtime and bot framework\n1) Node.js (ESM) single service process.\n2) grammY for Telegram update handling, middleware, and conversational flows.\n3) Configuration via environment variables, including TELEGRAMBOTTOKEN.\n\nPersistence\n1) MongoDB (already integrated) for durable storage of users, submissions, roasts, and moderation state.\n2) In-memory maps for short-lived session state and cooldowns (with TTL cleanup) to keep flows responsive.\n\nExternal integrations (kept generic)\n1) A text generation provider to produce the roast; the bot is designed so the provider can be swapped without changing business logic.\n2) Optional: object storage or simple filesystem storage only if you later support user-uploaded screenshots or cached page snapshots; otherwise not required.\n\nHTTP and content retrieval\n1) A simple HTTP client for fetching public web pages with strict size/time limits.\n2) An HTML-to-text extraction approach to derive headline/CTA/trust signals for the UX critique.\n\nDeployment and operations\n1) Run as a Node.js server in the cloud.\n2) Use either long polling or webhook mode depending on your environment; the architecture supports both.\n3) Centralized logs and basic metrics exported from the process (latency, error rates, rate-limits, generation time).",
           "nonFunctional": "Security and privacy\n1) Minimize stored data: store only what’s needed for history and abuse prevention; allow users to disable history.\n2) Treat links as untrusted input: enforce allow/deny rules (e.g., block local network targets), timeouts, and response size caps.\n3) Protect tokens and secrets via environment variables; avoid printing sensitive content in logs.\n\nSafety and tone guarantees\n1) The bot never targets immutable characteristics or the user personally; it critiques the product and messaging.\n2) Built-in refusal patterns for requests to harass, doxx, or generate hateful content.\n3) If user requests “more savage,” the bot increases bluntness and humor, not cruelty.\n\nPerformance and scalability\n1) Limit concurrent roasts per process to avoid memory spikes; queue internally using in-process concurrency control.\n2) Cache link fetch results briefly (content hash + TTL) to avoid repeated downloads during “roast again.”\n3) Keep responses compact and consistent; always enforce the 500-word maximum.\n\nReliability and maintainability\n1) Clear error handling paths: link fetch failure, generation timeout, Telegram API errors.\n2) Idempotent handling of updates and retries.\n3) Structured logging with correlation ids per submission.\n\nProduct quality\n1) Output consistency enforced by schema-like validation (section presence, word count, actionable items).\n2) A/B testable system prompts and tone settings stored in config so you can iterate without redeploying frequently.\n3) Basic analytics: counts of roasts, average score distribution, most common red flags (derived tags) to improve prompts and UX."
         },
-        "balanceCentsRemaining": 10,
+        "balanceCentsRemaining": 0,
         "billing": {
           "ok": true,
-          "charged": 34,
-          "remaining": 10,
-          "chargedCents": 34,
-          "remainingCents": 10,
+          "charged": 54,
+          "remaining": 0,
+          "chargedCents": 54,
+          "remainingCents": 0,
           "currency": "USD",
-          "baseUsd": 0.17093399999999997,
-          "markupUsd": 0.17093399999999997,
+          "baseUsd": 0.270104,
+          "markupUsd": 0.270104,
           "platformFeeUsd": 0,
-          "totalUsd": 0.34186799999999995
+          "totalUsd": 0.540208
         },
         "title": "Roast My Project (Telegram B"
       }
     }
   },
   "runStatus": {
-    "phase": "reindex",
+    "phase": "done",
     "stage": "chat",
     "runId": "1f7eb59c-2200-4b77-861c-0a19a47c2cdf:mlv786yf:5j1q87",
     "lastUserMessage": "upgrade and Make it more investor-style (VC tone) Make it more analytical (TAM, CAC, moat focus), Shorten it for faster Telegram responses",
     "startedAt": "2026-02-20T15:30:42.573Z",
-    "updatedAt": "2026-02-20T18:05:19.122Z",
-    "message": "Syncing environment template with used env variables…",
+    "updatedAt": "2026-02-20T18:05:20.555Z",
+    "message": "GitHub auto-push done: 24bbe9d",
     "commands": [
       {
         "name": "help",
@@ -650,19 +669,23 @@
       "fileStructure": {
         ".env.sample": {
           "type": "file",
-          "content": "# Telegram\nTELEGRAM_BOT_TOKEN=\n\n# Database (optional, used for long-term memory)\nMONGODB_URI=\n\n# CookMyBots AI Gateway (required)\n# COOKMYBOTS_AI_ENDPOINT is a BASE URL (do NOT include /chat)\nCOOKMYBOTS_AI_ENDPOINT=https://api.cookmybots.com/api/ai\nCOOKMYBOTS_AI_KEY=\n\n# Optional controls\nAI_TIMEOUT_MS=600000\nAI_MAX_RETRIES=2\n\n# Runner/backpressure (optional)\nCONCURRENCY=1\nGLOBAL_INFLIGHT_CAP=2\n\n# Optional (provided by platform after deploy, not required to run)\nPUBLIC_BASE_URL=\n"
+          "content": "# Telegram\nTELEGRAM_BOT_TOKEN=\n\n# Database (optional, used for long-term memory)\nMONGODB_URI=\n\n# CookMyBots AI Gateway (required)\n# COOKMYBOTS_AI_ENDPOINT is a BASE URL (do NOT include /chat)\nCOOKMYBOTS_AI_ENDPOINT=https://api.cookmybots.com/api/ai\nCOOKMYBOTS_AI_KEY=\n\n# Optional controls\nAI_TIMEOUT_MS=600000\nAI_MAX_RETRIES=2\n\n# Runner/backpressure (optional)\nCONCURRENCY=1\nGLOBAL_INFLIGHT_CAP=2\n\n# Optional (provided by platform after deploy, not required to run)\nPUBLIC_BASE_URL=\n\n# Auto-synced env keys detected from process.env usage:\nAI_SHORT_MAX_CHARS=\n\n"
+        },
+        ".render.json": {
+          "type": "file",
+          "content": "{\n  \"serviceId\": \"srv-d6c8jaogjchc73fk6hi0\",\n  \"createdAt\": \"2026-02-20T16:19:57.105Z\"\n}"
         },
         "CHANGELOG.md": {
           "type": "file",
-          "content": "# Changelog\n\nAll notable changes to this bot project are recorded here.\n\n## 2026-02-20 15:32:33. UTC\n- Request: You are “Roast My Project,” a brutally honest but constructive startup critic whose job is to evaluate a user’s project, product, landing page, or business idea with sharp, witty, intelligent feedback that is slightly s…\n- Summary: Created Roast Critic as a full Telegram bot with command modules (/start, /help, /reset) registered via a loader, and an AI roast agent in src/features/agent.js registered after commands. Added CookMyBots AI Gateway cli…\n- Files: .env.sample, DOCS.md, README.md, package.json, src/bot.js, src/commands/help.js, src/commands/loader.js, src/commands/reset.js, src/commands/start.js, src/features/agent.js, src/index.js, src/lib/ai.js, src/lib/botProfile.js, src/lib/config.js (+3 more)\n\n"
+          "content": "# Changelog\n\nAll notable changes to this bot project are recorded here.\n\n## 2026-02-20 18:05:18. UTC\n- Request: upgrade and Make it more investor-style (VC tone) Make it more analytical (TAM, CAC, moat focus), Shorten it for faster Telegram responses\n- Summary: Upgraded the agent to a compact VC-style analytical roast with the required short-form structure (verdict, investor-relevant score, TAM, CAC/unit economics, moat, GTM wedge, red flags, next steps). Updated Bot Profile i…\n- Files: .env.sample, DOCS.md, README.md, package.json, src/commands/help.js, src/commands/start.js, src/features/agent.js, src/lib/botProfile.js, src/lib/memory.js\n\n## 2026-02-20 15:32:33. UTC\n- Request: You are “Roast My Project,” a brutally honest but constructive startup critic whose job is to evaluate a user’s project, product, landing page, or business idea with sharp, witty, intelligent feedback that is slightly s…\n- Summary: Created Roast Critic as a full Telegram bot with command modules (/start, /help, /reset) registered via a loader, and an AI roast agent in src/features/agent.js registered after commands. Added CookMyBots AI Gateway cli…\n- Files: .env.sample, DOCS.md, README.md, package.json, src/bot.js, src/commands/help.js, src/commands/loader.js, src/commands/reset.js, src/commands/start.js, src/features/agent.js, src/index.js, src/lib/ai.js, src/lib/botProfile.js, src/lib/config.js (+3 more)\n\n"
         },
         "DOCS.md": {
           "type": "file",
-          "content": "What this bot does\nRoast Critic is a Telegram bot that critiques startup ideas, product concepts, landing page copy, and business ideas. It is blunt and witty, but it never attacks the person. It keeps responses under 500 words and always uses a consistent section order.\n\nPublic commands\n1) /start\nWhat it does: Explains what to submit, the 1–10 scoring scale, and the style boundaries.\nUsage: /start\n\n2) /help\nWhat it does: Shows examples of good submissions and explains what the bot returns.\nUsage: /help\n\n3) /reset\nWhat it does: Clears the user’s stored long-term memory (conversation turns) for this chat.\nUsage: /reset\n\nHow to use\nSend 2–8 sentences describing your project. Include an optional URL. If you include a URL, the roast will explicitly critique positioning and UX elements like headline clarity, CTA effectiveness, trust signals, and friction.\n\nEnvironment variables\n1) TELEGRAM_BOT_TOKEN (required)\nUsed to connect to Telegram.\n\n2) COOKMYBOTS_AI_ENDPOINT (required)\nCookMyBots AI Gateway base URL. Example format: https://api.cookmybots.com/api/ai\nImportant: do not include /chat in this value.\n\n3) COOKMYBOTS_AI_KEY (required)\nCookMyBots AI Gateway key used for Authorization: Bearer.\n\n4) MONGODB_URI (optional)\nIf set, the bot stores conversation turns in MongoDB in the memory_messages collection. If missing, it falls back to in-memory storage and logs a warning.\n\n5) AI_TIMEOUT_MS (optional)\nAI call timeout in milliseconds. Default is 600000.\n\n6) AI_MAX_RETRIES (optional)\nNumber of transient retries for AI calls. Default is 2.\n\n7) CONCURRENCY (optional)\nRunner concurrency for Telegram updates. Default is 1.\n\n8) GLOBAL_INFLIGHT_CAP (optional)\nGlobal cap for simultaneous AI roasts. Default is 2.\n\nRun instructions\n1) npm install\n2) Set env vars (see .env.sample)\n3) npm run dev\n"
+          "content": "What this bot does\nRoast My Project is a Telegram bot that critiques startup ideas, product concepts, and landing page positioning in a VC-style, analytical tone. It is blunt about the business but respectful to the person. Replies are intentionally compact for quick Telegram reading.\n\nPublic commands\n1) /start\nWhat it does: Explains what to submit, what the Roast Score means, and the style boundaries.\nUsage: /start\n\n2) /help\nWhat it does: Shows examples of good submissions and explains the output sections.\nUsage: /help\n\n3) /reset\nWhat it does: Clears the user’s stored long-term memory (conversation turns) for this chat.\nUsage: /reset\n\nHow to use\nSend 2–8 sentences describing your project. Helpful details include: target buyer/ICP, pricing, distribution channel, usage frequency, and any traction. You can include an optional URL.\n\nOutput format (short-form)\nEach response follows this structure:\n1) Verdict: Pass/Watch/Lean Yes/Yes + biggest reason\n2) Roast Score: 1–10 (investor-relevant)\n3) TAM snapshot: 1–2 lines using TAM/SAM/SOM logic\n4) Unit economics & CAC reality check: 2–3 lines max\n5) Moat & differentiation: 1–2 lines\n6) GTM wedge: 1–2 lines\n7) Red flags: up to 3 items\n8) Next steps: 2 concrete actions\n\nFollow-up questions\nIf critical info is missing that blocks TAM/CAC/moat evaluation (buyer/ICP, pricing, acquisition channel, usage frequency, traction), the bot asks at most 2 questions at the end.\n\nEnvironment variables\n1) TELEGRAM_BOT_TOKEN (required)\nUsed to connect to Telegram.\n\n2) COOKMYBOTS_AI_ENDPOINT (required)\nCookMyBots AI Gateway base URL. Example format: https://api.cookmybots.com/api/ai\nImportant: do not include /chat in this value.\n\n3) COOKMYBOTS_AI_KEY (required)\nCookMyBots AI Gateway key used for Authorization: Bearer.\n\n4) MONGODB_URI (optional)\nIf set, the bot stores conversation turns in MongoDB in the memory_messages collection. If missing, it falls back to in-memory storage and logs a warning.\n\n5) AI_TIMEOUT_MS (optional)\nAI call timeout in milliseconds. Default is 600000.\n\nRun instructions\n1) npm install\n2) Set env vars (see .env.sample)\n3) npm run dev\n"
         },
         "README.md": {
           "type": "file",
-          "content": "Roast Critic is a Telegram bot that gives brutally honest but constructive feedback on startup ideas and landing page copy. Users paste a short description (and optionally a URL) and the bot replies with a structured roast and a 1–10 score.\n\nSetup\n1) Install dependencies: npm install\n2) Create a .env file (or set env vars in your host) using .env.sample as a reference\n3) Run locally: npm run dev\n4) Run in production: npm start\n\nEnvironment variables\n1) TELEGRAM_BOT_TOKEN (required) Telegram bot token\n2) COOKMYBOTS_AI_ENDPOINT (required) CookMyBots AI Gateway base URL (must NOT include /chat)\n3) COOKMYBOTS_AI_KEY (required) CookMyBots AI Gateway key\n4) MONGODB_URI (optional) Enables long-term memory storage in MongoDB. If missing, the bot uses an in-memory fallback.\n5) AI_TIMEOUT_MS (optional) AI request timeout in ms. Default 600000.\n6) AI_MAX_RETRIES (optional) Retries for transient AI errors. Default 2.\n7) CONCURRENCY (optional) grammY runner concurrency. Default 1.\n8) GLOBAL_INFLIGHT_CAP (optional) Max simultaneous roasts in the process. Default 2.\n\nCommands\n1) /start: what to send and how scoring works\n2) /help: examples of good submissions and what you’ll get back\n3) /reset: clear your stored memory for this chat\n\nTypical usage\nSend 2–8 sentences about your project plus an optional link. If a link is present, Roast Critic will focus more on positioning and UX: headline, clarity, CTA, trust signals, and friction.\n\nNotes on reliability\nThe bot uses long polling via @grammyjs/runner with concurrency=1, clears any webhook at boot, and retries on Telegram 409 conflicts. It includes per-user in-flight locks and a small global cap to prevent memory build-up.\n"
+          "content": "Roast My Project is a Telegram bot that gives VC-style, analytical roasts of startup ideas and landing pages. Users paste a short description (and optionally a URL) and the bot replies with a compact investor-style evaluation and a 1–10 Roast Score.\n\nSetup\n1) Install dependencies: npm install\n2) Create a .env file (or set env vars in your host) using .env.sample as a reference\n3) Run locally: npm run dev\n4) Run in production: npm start\n\nEnvironment variables\n1) TELEGRAM_BOT_TOKEN (required) Telegram bot token\n2) COOKMYBOTS_AI_ENDPOINT (required) CookMyBots AI Gateway base URL (must NOT include /chat)\n3) COOKMYBOTS_AI_KEY (required) CookMyBots AI Gateway key\n4) MONGODB_URI (optional) Enables long-term memory storage in MongoDB. If missing, the bot uses an in-memory fallback.\n5) AI_TIMEOUT_MS (optional) AI request timeout in ms. Default 600000.\n\nCommands\n1) /start: what to send and how scoring works\n2) /help: examples of good submissions and what you’ll get back\n3) /reset: clear your stored memory for this chat\n\nOutput format (short-form)\nEvery response follows this order:\n1) Verdict: Pass/Watch/Lean Yes/Yes + biggest reason\n2) Roast Score: 1–10\n3) TAM snapshot (TAM/SAM/SOM framing)\n4) Unit economics & CAC reality check\n5) Moat & differentiation\n6) GTM wedge\n7) Red flags (up to 3)\n8) Next steps (2 concrete actions)\n\nNotes on reliability\nThe bot uses long polling via @grammyjs/runner with concurrency=1, clears any webhook at boot, and retries on Telegram 409 conflicts. It includes per-user in-flight locks and a small global cap to prevent memory build-up.\n"
         },
         "package.json": {
           "type": "file",
@@ -680,7 +703,7 @@
               "children": {
                 "help.js": {
                   "type": "file",
-                  "content": "export default function register(bot) {\n  bot.command(\"help\", async (ctx) => {\n    await ctx.reply(\n      [\n        \"Send a short project description and I’ll reply with a structured roast and a 1–10 score.\",\n        \"\",\n        \"Good submission examples:\",\n        \"1) “We’re building payroll for 20–50 person startups. Setup takes 10 minutes. We charge $99/month. Our edge is instant onboarding via bank sync.”\",\n        \"2) “Landing page copy: Headline: ‘Plan trips in minutes.’ Subhead: ‘AI itinerary with real-time prices.’ CTA: ‘Get my itinerary’. https://example.com”\",\n        \"\",\n        \"What you’ll get back (in order): first impression, problem clarity, differentiation, business model realism, target market focus, biggest red flag, 3–5 concrete improvements, Roast Score (1–10), mic-drop closing line.\",\n        \"\",\n        \"Need a fresh slate? Use /reset to clear your stored memory.\",\n      ].join(\"\\n\")\n    );\n  });\n}\n"
+                  "content": "export default function register(bot) {\n  bot.command(\"help\", async (ctx) => {\n    await ctx.reply(\n      [\n        \"Send a short project description and I’ll reply in a compact VC-style format.\",\n        \"\",\n        \"Good submission examples:\",\n        \"1) “We sell compliance automation to dental clinics. $299/mo per location. Acquisition via partnerships with practice management software consultants. Early: 12 paying customers.”\",\n        \"2) “B2B: AI inbox triage for customer support teams. ICP: 50–500 seat SaaS. Pricing: $40/agent/mo. Channel: app marketplace + outbound to support leaders. https://example.com”\",\n        \"\",\n        \"What you’ll get back:\",\n        \"Verdict, Roast Score (1–10), TAM snapshot, unit economics & CAC check, moat, GTM wedge, up to 3 red flags, and 2 next steps.\",\n        \"\",\n        \"If you leave out critical info (buyer, pricing, channel, usage frequency, traction), I’ll ask up to 2 questions.\",\n        \"Need a fresh slate? Use /reset.\",\n      ].join(\"\\n\")\n    );\n  });\n}\n"
                 },
                 "loader.js": {
                   "type": "file",
@@ -692,7 +715,7 @@
                 },
                 "start.js": {
                   "type": "file",
-                  "content": "export default function register(bot) {\n  bot.command(\"start\", async (ctx) => {\n    await ctx.reply(\n      [\n        \"Roast Critic is a brutally honest but constructive startup critic.\",\n        \"Send me 2–8 sentences about your project (what it is, who it’s for, what pain it solves), and optionally a URL.\",\n        \"I’ll roast the idea, not you: savage about the product, respectful to the person.\",\n        \"\",\n        \"Roast Score is 1–10.\",\n        \"1 = This will die quietly\",\n        \"10 = Annoyingly good idea\",\n      ].join(\"\\n\")\n    );\n  });\n}\n"
+                  "content": "export default function register(bot) {\n  bot.command(\"start\", async (ctx) => {\n    await ctx.reply(\n      [\n        \"Roast My Project gives VC-style, analytical roasts of startup ideas and landing pages.\",\n        \"Send 2–8 sentences: what it is, who buys, pricing idea, and how you’ll acquire users. Add a URL if you have one.\",\n        \"I’ll be blunt about the business, respectful to you.\",\n        \"\",\n        \"Roast Score is 1–10 (investor-relevant).\",\n        \"1 = not fundable as described\",\n        \"10 = unusually strong for stage\",\n        \"\",\n        \"Commands: /help for examples, /reset to clear memory.\",\n      ].join(\"\\n\")\n    );\n  });\n}\n"
                 }
               }
             },
@@ -701,7 +724,7 @@
               "children": {
                 "agent.js": {
                   "type": "file",
-                  "content": "import { cfg } from \"../lib/config.js\";\nimport { aiChat, extractChatContent } from \"../lib/ai.js\";\nimport { addTurn, getRecentTurns } from \"../lib/memory.js\";\nimport { buildBotProfile } from \"../lib/botProfile.js\";\nimport { safeErr } from \"../lib/safeErr.js\";\n\nconst inflightByKey = new Map();\nlet globalInflight = 0;\n\nfunction clampText(s, maxChars) {\n  const t = String(s || \"\").trim();\n  if (t.length <= maxChars) return t;\n  return t.slice(0, maxChars) + \"…\";\n}\n\nfunction extractUrl(text) {\n  const t = String(text || \"\");\n  const m = t.match(/https?:\\/\\/[^\\s)\\]}>,\"']+/i);\n  return m ? m[0] : \"\";\n}\n\nfunction wordCount(text) {\n  return String(text || \"\")\n    .trim()\n    .split(/\\s+/)\n    .filter(Boolean).length;\n}\n\nfunction keyFor(ctx) {\n  const userId = String(ctx.from?.id || \"\");\n  const chatId = String(ctx.chat?.id || \"\");\n  return userId ? `u:${userId}` : `c:${chatId}`;\n}\n\nfunction buildSystemPrompt({ hasUrl }) {\n  const profile = buildBotProfile();\n  const extra = hasUrl\n    ? \"\\n\\nExtra instruction: The user included a URL. Make sure your critique explicitly covers UX and positioning (headline strength, messaging clarity, CTA effectiveness, trust signals, friction), even if you can't browse the page.\"\n    : \"\";\n\n  const style = [\n    \"Style constraints:\",\n    \"1) Witty and blunt, but not mean.\",\n    \"2) No insults about the user. No protected-class content.\",\n    \"3) Keep it under 500 words total.\",\n    \"4) Be specific and concrete in improvements.\",\n  ].join(\"\\n\");\n\n  return profile + \"\\n\\n\" + style + extra;\n}\n\nexport function registerAgent(bot) {\n  bot.on(\"message:text\", async (ctx, next) => {\n    const raw = ctx.message?.text || \"\";\n    if (raw.startsWith(\"/\")) return next();\n\n    const k = keyFor(ctx);\n\n    if (inflightByKey.get(k)) {\n      await ctx.reply(\"I’m still roasting your last one—give me a sec.\");\n      return;\n    }\n\n    const cap = Number.isFinite(cfg.GLOBAL_INFLIGHT_CAP) ? cfg.GLOBAL_INFLIGHT_CAP : 2;\n    if (globalInflight >= Math.max(1, cap)) {\n      await ctx.reply(\"Busy, try again in a moment.\");\n      return;\n    }\n\n    inflightByKey.set(k, true);\n    globalInflight++;\n\n    try {\n      const userId = String(ctx.from?.id || \"\");\n      const chatId = String(ctx.chat?.id || \"\");\n\n      const url = extractUrl(raw);\n      const hasUrl = !!url;\n\n      const userText = clampText(raw, 6000);\n\n      await addTurn({\n        mongoUri: cfg.MONGODB_URI,\n        platform: \"telegram\",\n        userId,\n        chatId,\n        role: \"user\",\n        text: userText,\n      });\n\n      const history = await getRecentTurns({\n        mongoUri: cfg.MONGODB_URI,\n        platform: \"telegram\",\n        userId,\n        chatId,\n        limit: 18,\n      });\n\n      const botProfile = buildBotProfile();\n      const system = buildSystemPrompt({ hasUrl });\n\n      const messages = [\n        { role: \"system\", content: system },\n        { role: \"system\", content: \"Bot Profile:\\n\" + botProfile },\n        ...history.map((m) => ({\n          role: m.role === \"assistant\" ? \"assistant\" : \"user\",\n          content: clampText(m.text, 2000),\n        })),\n        {\n          role: \"user\",\n          content:\n            (hasUrl\n              ? `Submission (includes URL: ${url}):\\n${userText}`\n              : `Submission:\\n${userText}`) +\n            \"\\n\\nReturn the roast in the exact required section order.\",\n        },\n      ];\n\n      const res = await aiChat(\n        cfg,\n        {\n          messages,\n          meta: {\n            platform: \"telegram\",\n            userId,\n            chatId,\n            feature: \"roast\",\n            hasUrl,\n          },\n        },\n        { timeoutMs: cfg.AI_TIMEOUT_MS, retries: cfg.AI_MAX_RETRIES }\n      );\n\n      if (!res.ok) {\n        console.log(\"[agent] ai failed\", { status: res.status, err: res.error });\n        await ctx.reply(\"I couldn’t finish the roast right now. Try again in a bit.\");\n        return;\n      }\n\n      let out = extractChatContent(res.json);\n      if (!out) {\n        console.log(\"[agent] ai missing output\", { keys: Object.keys(res.json || {}) });\n        await ctx.reply(\"I got an empty roast back. Try again with a bit more detail.\");\n        return;\n      }\n\n      // Enforce: under 500 words (soft clamp)\n      if (wordCount(out) > 500) {\n        out = out\n          .split(/\\s+/)\n          .slice(0, 500)\n          .join(\" \")\n          .trim();\n        out = out + \"\\n\\n(Trimmed to 500 words.)\";\n      }\n\n      await addTurn({\n        mongoUri: cfg.MONGODB_URI,\n        platform: \"telegram\",\n        userId,\n        chatId,\n        role: \"assistant\",\n        text: out,\n      });\n\n      await ctx.reply(out);\n    } catch (e) {\n      console.log(\"[agent] handler error\", { err: safeErr(e) });\n      await ctx.reply(\"Something went wrong. Try again in a moment.\");\n    } finally {\n      inflightByKey.delete(k);\n      globalInflight = Math.max(0, globalInflight - 1);\n    }\n  });\n}\n"
+                  "content": "import { cfg } from \"../lib/config.js\";\nimport { aiChat, extractChatContent } from \"../lib/ai.js\";\nimport { addTurn, getRecentTurns } from \"../lib/memory.js\";\nimport { buildBotProfile } from \"../lib/botProfile.js\";\nimport { safeErr } from \"../lib/safeErr.js\";\n\nconst inflightByKey = new Map();\nlet globalInflight = 0;\n\nfunction clampText(s, maxChars) {\n  const t = String(s || \"\").trim();\n  if (t.length <= maxChars) return t;\n  return t.slice(0, maxChars) + \"…\";\n}\n\nfunction extractUrl(text) {\n  const t = String(text || \"\");\n  const m = t.match(/https?:\\/\\/[^\\s)\\]}>,\"']+/i);\n  return m ? m[0] : \"\";\n}\n\nfunction keyFor(ctx) {\n  const userId = String(ctx.from?.id || \"\");\n  const chatId = String(ctx.chat?.id || \"\");\n  return userId ? `u:${userId}` : `c:${chatId}`;\n}\n\nfunction truncateAtParagraphBoundary(text, maxChars) {\n  const t = String(text || \"\").trim();\n  if (t.length <= maxChars) return t;\n\n  const slice = t.slice(0, maxChars);\n  const idx = Math.max(slice.lastIndexOf(\"\\n\\n\"), slice.lastIndexOf(\"\\n\"));\n\n  if (idx > Math.floor(maxChars * 0.6)) {\n    return slice.slice(0, idx).trim() + \"\\n\\n(Trimmed.)\";\n  }\n\n  const idx2 = Math.max(slice.lastIndexOf(\". \"), slice.lastIndexOf(\".\\n\"), slice.lastIndexOf(\"; \"));\n  if (idx2 > Math.floor(maxChars * 0.6)) {\n    return slice.slice(0, idx2 + 1).trim() + \" (Trimmed.)\";\n  }\n\n  return slice.trim() + \"…\";\n}\n\nfunction buildSystemPrompt({ hasUrl }) {\n  const botProfile = buildBotProfile();\n\n  const style = [\n    \"You are a VC/investor doing a fast, high-signal evaluation.\",\n    \"Be crisp, analytical, and slightly blunt about the business. Always respectful to the person.\",\n    \"Plain text only. No markdown.\",\n    \"Default to short output that fits a quick Telegram read.\",\n    \"If critical info is missing that blocks TAM/CAC/moat assessment, ask at most 2 questions at the end.\",\n    \"Do not ask questions unless it materially changes the evaluation.\",\n    \"\",\n    \"You MUST follow the required output structure exactly and keep each section short.\",\n    \"Red flags: up to 3 items max.\",\n    \"Next steps: exactly 2 actions.\",\n  ].join(\"\\n\");\n\n  const linkNote = hasUrl\n    ? \"\\n\\nUser included a URL. You may comment on positioning/landing-page clarity, but do not claim you browsed the page unless the user explicitly pasted content.\"\n    : \"\";\n\n  return botProfile + \"\\n\\n\" + style + linkNote;\n}\n\nexport function registerAgent(bot) {\n  bot.on(\"message:text\", async (ctx, next) => {\n    const raw = ctx.message?.text || \"\";\n    if (raw.startsWith(\"/\")) return next();\n\n    const k = keyFor(ctx);\n\n    if (inflightByKey.get(k)) {\n      await ctx.reply(\"I’m working on your last one—give me a sec.\");\n      return;\n    }\n\n    const cap = Number.isFinite(cfg.GLOBAL_INFLIGHT_CAP) ? cfg.GLOBAL_INFLIGHT_CAP : 2;\n    if (globalInflight >= Math.max(1, cap)) {\n      await ctx.reply(\"Busy, try again in a moment.\");\n      return;\n    }\n\n    inflightByKey.set(k, true);\n    globalInflight++;\n\n    try {\n      const userId = String(ctx.from?.id || \"\");\n      const chatId = String(ctx.chat?.id || \"\");\n\n      const url = extractUrl(raw);\n      const hasUrl = !!url;\n\n      const userText = clampText(raw, 6000);\n\n      await addTurn({\n        mongoUri: cfg.MONGODB_URI,\n        platform: \"telegram\",\n        userId,\n        chatId,\n        role: \"user\",\n        text: userText,\n      });\n\n      const history = await getRecentTurns({\n        mongoUri: cfg.MONGODB_URI,\n        platform: \"telegram\",\n        userId,\n        chatId,\n        limit: 18,\n      });\n\n      const system = buildSystemPrompt({ hasUrl });\n\n      const messages = [\n        { role: \"system\", content: system },\n        ...history.map((m) => ({\n          role: m.role === \"assistant\" ? \"assistant\" : \"user\",\n          content: clampText(m.text, 1600),\n        })),\n        {\n          role: \"user\",\n          content:\n            (hasUrl\n              ? `Submission (includes URL: ${url}):\\n${userText}`\n              : `Submission:\\n${userText}`) +\n            \"\\n\\nRespond using the required short-form VC structure.\",\n        },\n      ];\n\n      const res = await aiChat(\n        cfg,\n        {\n          messages,\n          meta: {\n            platform: \"telegram\",\n            userId,\n            chatId,\n            feature: \"vc_roast\",\n            hasUrl,\n          },\n        },\n        { timeoutMs: cfg.AI_TIMEOUT_MS, retries: cfg.AI_MAX_RETRIES }\n      );\n\n      if (!res.ok) {\n        console.log(\"[agent] ai failed\", { status: res.status, err: res.error });\n        await ctx.reply(\"I couldn’t finish the analysis right now. Try again in a bit.\");\n        return;\n      }\n\n      let out = extractChatContent(res.json);\n      if (!out) {\n        console.log(\"[agent] ai missing output\", { keys: Object.keys(res.json || {}) });\n        await ctx.reply(\"I got an empty response back. Try again with a bit more detail.\");\n        return;\n      }\n\n      const maxChars = Number(process.env.AI_SHORT_MAX_CHARS || 1600);\n      out = truncateAtParagraphBoundary(out, Number.isFinite(maxChars) && maxChars > 300 ? maxChars : 1600);\n\n      await addTurn({\n        mongoUri: cfg.MONGODB_URI,\n        platform: \"telegram\",\n        userId,\n        chatId,\n        role: \"assistant\",\n        text: out,\n      });\n\n      await ctx.reply(out);\n    } catch (e) {\n      console.log(\"[agent] handler error\", { err: safeErr(e) });\n      await ctx.reply(\"Something went wrong. Try again in a moment.\");\n    } finally {\n      inflightByKey.delete(k);\n      globalInflight = Math.max(0, globalInflight - 1);\n    }\n  });\n}\n"
                 }
               }
             },
@@ -718,7 +741,7 @@
                 },
                 "botProfile.js": {
                   "type": "file",
-                  "content": "export function buildBotProfile() {\n  return [\n    \"You are Roast Critic, a Telegram bot that gives brutally honest but constructive feedback on startup ideas and landing page copy.\",\n    \"You are sharp and witty, slightly savage about the idea, and always respectful to the person.\",\n    \"Keep the full response under 500 words.\",\n    \"\",\n    \"Public commands:\",\n    \"1) /start: what to submit and how scoring works\",\n    \"2) /help: examples and what the roast contains\",\n    \"3) /reset: clear this user's stored memory\",\n    \"\",\n    \"Behavior rules:\",\n    \"1) If the user includes a URL, focus extra on UX and positioning: headline strength, messaging clarity, CTA effectiveness, trust signals, and obvious friction.\",\n    \"2) Never generate harassment, slurs, or protected-class insults. No personal attacks. Critique the product, not the founder.\",\n    \"3) If the user asks for toxic content, briefly refuse that part and continue with a constructive roast.\",\n    \"\",\n    \"Output format: You MUST include these sections in this exact order:\",\n    \"1) Strong first impression (1–3 sentences)\",\n    \"2) Problem clarity assessment\",\n    \"3) Differentiation assessment\",\n    \"4) Business model realism\",\n    \"5) Target market focus\",\n    \"6) Single biggest red flag (one paragraph)\",\n    \"7) 3–5 specific and actionable improvements (concrete, not generic)\",\n    \"8) Roast Score (1–10) where 1 = This will die quietly and 10 = Annoyingly good idea\",\n    \"9) Mic-drop closing line (one sentence)\",\n  ].join(\"\\n\");\n}\n"
+                  "content": "export function buildBotProfile() {\n  return [\n    \"You are Roast My Project, a Telegram bot that gives VC-style, analytical roasts of startup ideas and landing pages.\",\n    \"Tone: crisp, investor-brain, slightly blunt about the business, always respectful to the person.\",\n    \"Default output is short and high-signal for quick Telegram reading.\",\n    \"\",\n    \"Public commands:\",\n    \"1) /start: instructions on what to submit + what the Roast Score means\",\n    \"2) /help: examples of good submissions + what the output includes\",\n    \"3) /reset: clears your stored memory for this chat\",\n    \"\",\n    \"Behavior rules:\",\n    \"1) Only respond to non-command text. If a message starts with '/', do not answer it as chat.\",\n    \"2) Never insult the user or use harassment/slurs. Critique the business, not the founder.\",\n    \"3) If key info is missing that blocks TAM/CAC/moat evaluation, ask at most 2 questions at the end.\",\n    \"\",\n    \"Required output structure for every response (keep it compact):\",\n    \"1) Verdict: Pass/Watch/Lean Yes/Yes + single biggest reason (one line)\",\n    \"2) Roast Score: 1–10 (investor-relevant)\",\n    \"3) TAM snapshot: 1–2 lines using TAM/SAM/SOM logic\",\n    \"4) Unit economics & CAC reality check: 2–3 lines max (CAC drivers, payback intuition, LTV drivers, sales-led vs product-led vs channel-led)\",\n    \"5) Moat & differentiation: 1–2 lines (data, distribution, switching costs, network effects, regulatory, brand) or why it’s copyable\",\n    \"6) GTM wedge: 1–2 lines (first ICP + channel + wedge)\",\n    \"7) Red flags: up to 3 short items\",\n    \"8) Next steps: 2 concrete actions\",\n  ].join(\"\\n\");\n}\n"
                 },
                 "config.js": {
                   "type": "file",
@@ -730,7 +753,7 @@
                 },
                 "memory.js": {
                   "type": "file",
-                  "content": "import { getDb } from \"./db.js\";\nimport { safeErr } from \"./safeErr.js\";\n\nconst COL = \"memory_messages\";\n\n// In-memory fallback (bounded)\nconst MAX_MEM_TURNS_PER_USER = 40;\nconst mem = new Map(); // key: platform:userId[:chatId]\n\nfunction keyOf({ platform, userId, chatId }) {\n  const p = String(platform || \"\");\n  const u = String(userId || \"\");\n  const c = chatId ? String(chatId) : \"\";\n  return c ? `${p}:${u}:${c}` : `${p}:${u}`;\n}\n\nexport async function ensureMemoryIndexes(mongoUri) {\n  const db = await getDb(mongoUri);\n  if (!db) return;\n  try {\n    await db.collection(COL).createIndex({ platform: 1, userId: 1, ts: -1 });\n    await db.collection(COL).createIndex({ platform: 1, userId: 1, chatId: 1, ts: -1 });\n  } catch (e) {\n    console.log(\"[db] ensureIndexes failed\", { col: COL, err: safeErr(e) });\n  }\n}\n\nexport async function addTurn({ mongoUri, platform, userId, chatId, role, text }) {\n  const doc = {\n    platform: String(platform || \"telegram\"),\n    userId: String(userId || \"\"),\n    chatId: chatId ? String(chatId) : \"\",\n    role: role === \"assistant\" ? \"assistant\" : \"user\",\n    text: String(text || \"\").slice(0, 6000),\n    ts: new Date(),\n  };\n\n  const db = await getDb(mongoUri);\n  if (!db) {\n    const k = keyOf(doc);\n    const arr = mem.get(k) || [];\n    arr.push({ role: doc.role, text: doc.text, ts: doc.ts });\n    while (arr.length > MAX_MEM_TURNS_PER_USER) arr.shift();\n    mem.set(k, arr);\n    return;\n  }\n\n  try {\n    await db.collection(COL).insertOne(doc);\n  } catch (e) {\n    console.log(\"[db] insertOne failed\", { col: COL, err: safeErr(e) });\n  }\n}\n\nexport async function getRecentTurns({ mongoUri, platform, userId, chatId, limit = 16 }) {\n  const lim = Math.max(1, Math.min(Number(limit || 16), 20));\n\n  const db = await getDb(mongoUri);\n  if (!db) {\n    const k = keyOf({ platform, userId, chatId });\n    const arr = mem.get(k) || [];\n    return arr.slice(-lim).map((t) => ({ role: t.role, text: t.text }));\n  }\n\n  const q = { platform: String(platform || \"telegram\"), userId: String(userId || \"\") };\n  if (chatId) q.chatId = String(chatId);\n\n  try {\n    const rows = await db.collection(COL).find(q).sort({ ts: -1 }).limit(lim).toArray();\n    return rows.reverse().map((r) => ({ role: r.role, text: r.text }));\n  } catch (e) {\n    console.log(\"[db] find failed\", { col: COL, err: safeErr(e) });\n    return [];\n  }\n}\n\nexport async function clearUserMemory({ mongoUri, platform, userId, chatId }) {\n  const db = await getDb(mongoUri);\n  if (!db) {\n    mem.delete(keyOf({ platform, userId, chatId }));\n    // Also clear key without chatId to be safe\n    mem.delete(keyOf({ platform, userId, chatId: \"\" }));\n    return;\n  }\n\n  const q = { platform: String(platform || \"telegram\"), userId: String(userId || \"\") };\n  if (chatId) q.chatId = String(chatId);\n\n  try {\n    await db.collection(COL).deleteMany(q);\n  } catch (e) {\n    console.log(\"[db] deleteMany failed\", { col: COL, err: safeErr(e) });\n  }\n}\n"
+                  "content": "import { getDb } from \"./db.js\";\nimport { safeErr } from \"./safeErr.js\";\n\nconst COL = \"memory_messages\";\n\n// In-memory fallback (bounded)\nconst MAX_MEM_TURNS_PER_USER = 40;\nconst mem = new Map(); // key: platform:userId[:chatId]\n\nfunction keyOf({ platform, userId, chatId }) {\n  const p = String(platform || \"\");\n  const u = String(userId || \"\");\n  const c = chatId ? String(chatId) : \"\";\n  return c ? `${p}:${u}:${c}` : `${p}:${u}`;\n}\n\nfunction looksLikeSecret(s) {\n  const t = String(s || \"\");\n  if (!t) return false;\n  if (t.length > 20000) return true;\n  return (\n    /api[_-]?key\\s*[:=]/i.test(t) ||\n    /secret\\s*[:=]/i.test(t) ||\n    /password\\s*[:=]/i.test(t) ||\n    /bearer\\s+[a-z0-9\\-_.=]+/i.test(t) ||\n    /sk-[a-z0-9]{10,}/i.test(t) ||\n    /xox[baprs]-/i.test(t) ||\n    /-----BEGIN [A-Z ]+PRIVATE KEY-----/i.test(t)\n  );\n}\n\nfunction redactSecrets(text) {\n  let t = String(text || \"\");\n  if (!t) return t;\n\n  t = t.replace(/(authorization\\s*:\\s*bearer\\s+)[^\\s]+/gi, \"$1[REDACTED]\");\n  t = t.replace(/(bearer\\s+)[a-z0-9\\-_.=]+/gi, \"$1[REDACTED]\");\n  t = t.replace(/sk-[a-z0-9]{10,}/gi, \"sk-[REDACTED]\");\n  t = t.replace(/(api[_-]?key\\s*[:=]\\s*)[^\\s]+/gi, \"$1[REDACTED]\");\n  t = t.replace(/(password\\s*[:=]\\s*)[^\\s]+/gi, \"$1[REDACTED]\");\n  t = t.replace(/-----BEGIN [A-Z ]+PRIVATE KEY-----[\\s\\S]*?-----END [A-Z ]+PRIVATE KEY-----/g, \"[REDACTED_PRIVATE_KEY]\");\n\n  return t;\n}\n\nexport async function ensureMemoryIndexes(mongoUri) {\n  const db = await getDb(mongoUri);\n  if (!db) return;\n  try {\n    await db.collection(COL).createIndex({ platform: 1, userId: 1, ts: -1 });\n    await db.collection(COL).createIndex({ platform: 1, userId: 1, chatId: 1, ts: -1 });\n  } catch (e) {\n    console.log(\"[db] ensureIndexes failed\", { col: COL, err: safeErr(e) });\n  }\n}\n\nexport async function addTurn({ mongoUri, platform, userId, chatId, role, text }) {\n  let safeText = String(text || \"\");\n  if (looksLikeSecret(safeText)) safeText = redactSecrets(safeText);\n\n  const doc = {\n    platform: String(platform || \"telegram\"),\n    userId: String(userId || \"\"),\n    chatId: chatId ? String(chatId) : \"\",\n    role: role === \"assistant\" ? \"assistant\" : \"user\",\n    text: safeText.slice(0, 6000),\n    ts: new Date(),\n  };\n\n  const db = await getDb(mongoUri);\n  if (!db) {\n    const k = keyOf(doc);\n    const arr = mem.get(k) || [];\n    arr.push({ role: doc.role, text: doc.text, ts: doc.ts });\n    while (arr.length > MAX_MEM_TURNS_PER_USER) arr.shift();\n    mem.set(k, arr);\n    return;\n  }\n\n  try {\n    await db.collection(COL).insertOne(doc);\n  } catch (e) {\n    console.log(\"[db] insertOne failed\", { col: COL, err: safeErr(e) });\n  }\n}\n\nexport async function getRecentTurns({ mongoUri, platform, userId, chatId, limit = 16 }) {\n  const lim = Math.max(1, Math.min(Number(limit || 16), 20));\n\n  const db = await getDb(mongoUri);\n  if (!db) {\n    const k = keyOf({ platform, userId, chatId });\n    const arr = mem.get(k) || [];\n    return arr.slice(-lim).map((t) => ({ role: t.role, text: t.text }));\n  }\n\n  const q = { platform: String(platform || \"telegram\"), userId: String(userId || \"\") };\n  if (chatId) q.chatId = String(chatId);\n\n  try {\n    const rows = await db.collection(COL).find(q).sort({ ts: -1 }).limit(lim).toArray();\n    return rows.reverse().map((r) => ({ role: r.role, text: r.text }));\n  } catch (e) {\n    console.log(\"[db] find failed\", { col: COL, err: safeErr(e) });\n    return [];\n  }\n}\n\nexport async function clearUserMemory({ mongoUri, platform, userId, chatId }) {\n  const db = await getDb(mongoUri);\n  if (!db) {\n    mem.delete(keyOf({ platform, userId, chatId }));\n    mem.delete(keyOf({ platform, userId, chatId: \"\" }));\n    return;\n  }\n\n  const q = { platform: String(platform || \"telegram\"), userId: String(userId || \"\") };\n  if (chatId) q.chatId = String(chatId);\n\n  try {\n    await db.collection(COL).deleteMany(q);\n  } catch (e) {\n    console.log(\"[db] deleteMany failed\", { col: COL, err: safeErr(e) });\n  }\n}\n"
                 },
                 "safeErr.js": {
                   "type": "file",
@@ -744,33 +767,33 @@
       "commands": [
         {
           "command": "/help",
-          "description": "Shows examples of good submissions and explains the roast output sections and score.",
+          "description": "Shows examples of good submissions and explains the short-form VC output sections.",
           "usage": "/help",
           "examples": [
-            "User: /help → Bot: Example submissions and what the response will include."
+            "User: /help → Bot: Example submissions + what the output includes (verdict, TAM, CAC, moat, GTM)."
           ],
-          "example": "User: /help → Bot: Example submissions and what the response will include.",
-          "notes": "Good for learning what details to include (ICP, pricing idea, link)."
+          "example": "User: /help → Bot: Example submissions + what the output includes (verdict, TAM, CAC, moat, GTM).",
+          "notes": "If critical info is missing, the bot may ask up to 2 questions at the end."
         },
         {
           "command": "/reset",
-          "description": "Clears your stored conversation memory for this chat.",
+          "description": "Clears your stored conversation memory for this chat (MongoDB if configured, otherwise in-memory fallback).",
           "usage": "/reset",
           "examples": [
             "User: /reset → Bot: Done. I’ve cleared your memory for this chat."
           ],
           "example": "User: /reset → Bot: Done. I’ve cleared your memory for this chat.",
-          "notes": "If MongoDB is not configured, this clears in-memory fallback instead."
+          "notes": "Use this if the bot’s context feels off or you’re switching to a new project."
         },
         {
           "command": "/start",
-          "description": "Explains what Roast Critic does, what to submit, and the 1–10 Roast Score scale.",
+          "description": "Explains what to submit for a VC-style roast and what the 1–10 Roast Score means.",
           "usage": "/start",
           "examples": [
-            "User: /start → Bot: Instructions on what to submit and how scoring works."
+            "User: /start → Bot: Tells you what details to include (ICP, pricing, channel) and what the score represents."
           ],
-          "example": "User: /start → Bot: Instructions on what to submit and how scoring works.",
-          "notes": "Style boundary: savage about the idea, respectful to the person."
+          "example": "User: /start → Bot: Tells you what details to include (ICP, pricing, channel) and what the score represents.",
+          "notes": "Send a short description; include buyer, pricing, and acquisition channel if you want the sharpest output."
         }
       ],
       "envVarDocs": [
@@ -788,7 +811,7 @@
           "key": "COOKMYBOTS_AI_ENDPOINT",
           "title": "CookMyBots AI Endpoint",
           "description": "Base URL for the CookMyBots AI Gateway. Must be a base URL (no /chat suffix).",
-          "usage": "The bot calls POST {COOKMYBOTS_AI_ENDPOINT}/chat for roasts.",
+          "usage": "The bot calls POST {COOKMYBOTS_AI_ENDPOINT}/chat.",
           "howToGet": "Provided in CookMyBots project settings.",
           "example": "https://api.cookmybots.com/api/ai",
           "isSecret": false,
@@ -807,8 +830,8 @@
         {
           "key": "MONGODB_URI",
           "title": "MongoDB Connection URI",
-          "description": "Optional. Enables long-term memory storage in the memory_messages collection. If missing, the bot uses an in-memory fallback and logs a warning.",
-          "usage": "MongoDB is used to store and retrieve the last 10–20 turns for context and to support /reset.",
+          "description": "Enables long-term memory in the memory_messages collection. If missing, the bot falls back to in-memory memory and still supports /reset.",
+          "usage": "Stores conversation turns and retrieves the most recent 10–20 turns for context.",
           "howToGet": "Create a MongoDB database (e.g., MongoDB Atlas) and copy the connection string.",
           "example": "mongodb+srv://user:pass@cluster.example.mongodb.net/dbname",
           "isSecret": true,
@@ -817,8 +840,8 @@
         {
           "key": "AI_TIMEOUT_MS",
           "title": "AI Timeout",
-          "description": "Optional. Timeout in milliseconds for CookMyBots AI calls.",
-          "usage": "Used by the AI gateway client to abort slow requests.",
+          "description": "Timeout in milliseconds for AI gateway calls.",
+          "usage": "Used in src/lib/ai.js via AbortController to stop slow requests.",
           "howToGet": "Set manually (optional).",
           "example": "600000",
           "isSecret": false,
@@ -838,30 +861,30 @@
       "commandDocs": [
         {
           "command": "/start",
-          "description": "Explains what Roast Critic does, what to submit, and the 1–10 Roast Score scale.",
+          "description": "Explains what to submit for a VC-style roast and what the 1–10 Roast Score means.",
           "usage": "/start",
           "examples": [
-            "User: /start → Bot: Instructions on what to submit and how scoring works."
+            "User: /start → Bot: Tells you what details to include (ICP, pricing, channel) and what the score represents."
           ],
-          "notes": "Style boundary: savage about the idea, respectful to the person."
+          "notes": "Send a short description; include buyer, pricing, and acquisition channel if you want the sharpest output."
         },
         {
           "command": "/help",
-          "description": "Shows examples of good submissions and explains the roast output sections and score.",
+          "description": "Shows examples of good submissions and explains the short-form VC output sections.",
           "usage": "/help",
           "examples": [
-            "User: /help → Bot: Example submissions and what the response will include."
+            "User: /help → Bot: Example submissions + what the output includes (verdict, TAM, CAC, moat, GTM)."
           ],
-          "notes": "Good for learning what details to include (ICP, pricing idea, link)."
+          "notes": "If critical info is missing, the bot may ask up to 2 questions at the end."
         },
         {
           "command": "/reset",
-          "description": "Clears your stored conversation memory for this chat.",
+          "description": "Clears your stored conversation memory for this chat (MongoDB if configured, otherwise in-memory fallback).",
           "usage": "/reset",
           "examples": [
             "User: /reset → Bot: Done. I’ve cleared your memory for this chat."
           ],
-          "notes": "If MongoDB is not configured, this clears in-memory fallback instead."
+          "notes": "Use this if the bot’s context feels off or you’re switching to a new project."
         }
       ],
       "aiMessages": [
@@ -872,6 +895,16 @@
         {
           "role": "assistant",
           "content": "Created Roast Critic as a full Telegram bot with command modules (/start, /help, /reset) registered via a loader, and an AI roast agent in src/features/agent.js registered after commands. Added CookMyBots AI Gateway client (src/lib/ai.js) with start/success/failure logs and timeout, MongoDB-backed long-term memory (memory_messages) with in-memory fallback, Bot Profile injection into every AI request, and production-safe polling via @grammyjs/runner with deleteWebhook, 409 conflict backoff, process-level crash guards, and in-flight locks/backpressure.\n\nFiles touched (17): .env.sample, DOCS.md, README.md, package.json, src/bot.js, src/commands/help.js…\nValidation: ✅ project passes syntax/basic checks after this edit."
+        },
+        {
+          "role": "user",
+          "content": "upgrade and Make it more investor-style (VC tone) Make it more analytical (TAM, CAC, moat focus), Shorten it for faster Telegram responses"
+        },
+        {
+          "role": "assistant",
+          "content": "Upgraded the agent to a compact VC-style analytical roast with the required short-form structure (verdict, investor-relevant score, TAM, CAC/unit economics, moat, GTM wedge, red flags, next steps). Updated Bot Profile injection accordingly, shortened /start and /help guidance to match, added a hard character cap with safe truncation, and added secret redaction before storing memory. README/DOCS/.env.sample were updated to reflect the new positioning and output format. Command routing and reliability behaviors were preserved (commands still registered before the catch-all, and slash commands always pass through).\n\nFiles touched (9): .env.sample, DOCS.md, README.md, package.json, src/commands/help.js, src/commands/start.js…\nValidation: ✅ project passes syntax/basic checks after this edit.",
+          "gitBeforeSha": "803ab4a6c2ec0ba51f7ca0a2c510fd19240924c4",
+          "gitAfterSha": "24bbe9dac321b68825fb49c30c55ad996378ac48"
         }
       ],
       "createdBy": "",
@@ -886,18 +919,18 @@
         "techStack": "Runtime and bot framework\n1) Node.js (ESM) single service process.\n2) grammY for Telegram update handling, middleware, and conversational flows.\n3) Configuration via environment variables, including TELEGRAMBOTTOKEN.\n\nPersistence\n1) MongoDB (already integrated) for durable storage of users, submissions, roasts, and moderation state.\n2) In-memory maps for short-lived session state and cooldowns (with TTL cleanup) to keep flows responsive.\n\nExternal integrations (kept generic)\n1) A text generation provider to produce the roast; the bot is designed so the provider can be swapped without changing business logic.\n2) Optional: object storage or simple filesystem storage only if you later support user-uploaded screenshots or cached page snapshots; otherwise not required.\n\nHTTP and content retrieval\n1) A simple HTTP client for fetching public web pages with strict size/time limits.\n2) An HTML-to-text extraction approach to derive headline/CTA/trust signals for the UX critique.\n\nDeployment and operations\n1) Run as a Node.js server in the cloud.\n2) Use either long polling or webhook mode depending on your environment; the architecture supports both.\n3) Centralized logs and basic metrics exported from the process (latency, error rates, rate-limits, generation time).",
         "nonFunctional": "Security and privacy\n1) Minimize stored data: store only what’s needed for history and abuse prevention; allow users to disable history.\n2) Treat links as untrusted input: enforce allow/deny rules (e.g., block local network targets), timeouts, and response size caps.\n3) Protect tokens and secrets via environment variables; avoid printing sensitive content in logs.\n\nSafety and tone guarantees\n1) The bot never targets immutable characteristics or the user personally; it critiques the product and messaging.\n2) Built-in refusal patterns for requests to harass, doxx, or generate hateful content.\n3) If user requests “more savage,” the bot increases bluntness and humor, not cruelty.\n\nPerformance and scalability\n1) Limit concurrent roasts per process to avoid memory spikes; queue internally using in-process concurrency control.\n2) Cache link fetch results briefly (content hash + TTL) to avoid repeated downloads during “roast again.”\n3) Keep responses compact and consistent; always enforce the 500-word maximum.\n\nReliability and maintainability\n1) Clear error handling paths: link fetch failure, generation timeout, Telegram API errors.\n2) Idempotent handling of updates and retries.\n3) Structured logging with correlation ids per submission.\n\nProduct quality\n1) Output consistency enforced by schema-like validation (section presence, word count, actionable items).\n2) A/B testable system prompts and tone settings stored in config so you can iterate without redeploying frequently.\n3) Basic analytics: counts of roasts, average score distribution, most common red flags (derived tags) to improve prompts and UX."
       },
-      "balanceCentsRemaining": 10,
+      "balanceCentsRemaining": 0,
       "billing": {
         "ok": true,
-        "charged": 34,
-        "remaining": 10,
-        "chargedCents": 34,
-        "remainingCents": 10,
+        "charged": 54,
+        "remaining": 0,
+        "chargedCents": 54,
+        "remainingCents": 0,
         "currency": "USD",
-        "baseUsd": 0.17093399999999997,
-        "markupUsd": 0.17093399999999997,
+        "baseUsd": 0.270104,
+        "markupUsd": 0.270104,
         "platformFeeUsd": 0,
-        "totalUsd": 0.34186799999999995
+        "totalUsd": 0.540208
       },
       "title": "Roast My Project (Telegram B"
     }
