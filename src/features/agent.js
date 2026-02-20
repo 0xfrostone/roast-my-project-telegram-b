@@ -19,34 +19,52 @@ function extractUrl(text) {
   return m ? m[0] : "";
 }
 
-function wordCount(text) {
-  return String(text || "")
-    .trim()
-    .split(/\s+/)
-    .filter(Boolean).length;
-}
-
 function keyFor(ctx) {
   const userId = String(ctx.from?.id || "");
   const chatId = String(ctx.chat?.id || "");
   return userId ? `u:${userId}` : `c:${chatId}`;
 }
 
+function truncateAtParagraphBoundary(text, maxChars) {
+  const t = String(text || "").trim();
+  if (t.length <= maxChars) return t;
+
+  const slice = t.slice(0, maxChars);
+  const idx = Math.max(slice.lastIndexOf("\n\n"), slice.lastIndexOf("\n"));
+
+  if (idx > Math.floor(maxChars * 0.6)) {
+    return slice.slice(0, idx).trim() + "\n\n(Trimmed.)";
+  }
+
+  const idx2 = Math.max(slice.lastIndexOf(". "), slice.lastIndexOf(".\n"), slice.lastIndexOf("; "));
+  if (idx2 > Math.floor(maxChars * 0.6)) {
+    return slice.slice(0, idx2 + 1).trim() + " (Trimmed.)";
+  }
+
+  return slice.trim() + "…";
+}
+
 function buildSystemPrompt({ hasUrl }) {
-  const profile = buildBotProfile();
-  const extra = hasUrl
-    ? "\n\nExtra instruction: The user included a URL. Make sure your critique explicitly covers UX and positioning (headline strength, messaging clarity, CTA effectiveness, trust signals, friction), even if you can't browse the page."
-    : "";
+  const botProfile = buildBotProfile();
 
   const style = [
-    "Style constraints:",
-    "1) Witty and blunt, but not mean.",
-    "2) No insults about the user. No protected-class content.",
-    "3) Keep it under 500 words total.",
-    "4) Be specific and concrete in improvements.",
+    "You are a VC/investor doing a fast, high-signal evaluation.",
+    "Be crisp, analytical, and slightly blunt about the business. Always respectful to the person.",
+    "Plain text only. No markdown.",
+    "Default to short output that fits a quick Telegram read.",
+    "If critical info is missing that blocks TAM/CAC/moat assessment, ask at most 2 questions at the end.",
+    "Do not ask questions unless it materially changes the evaluation.",
+    "",
+    "You MUST follow the required output structure exactly and keep each section short.",
+    "Red flags: up to 3 items max.",
+    "Next steps: exactly 2 actions.",
   ].join("\n");
 
-  return profile + "\n\n" + style + extra;
+  const linkNote = hasUrl
+    ? "\n\nUser included a URL. You may comment on positioning/landing-page clarity, but do not claim you browsed the page unless the user explicitly pasted content."
+    : "";
+
+  return botProfile + "\n\n" + style + linkNote;
 }
 
 export function registerAgent(bot) {
@@ -57,7 +75,7 @@ export function registerAgent(bot) {
     const k = keyFor(ctx);
 
     if (inflightByKey.get(k)) {
-      await ctx.reply("I’m still roasting your last one—give me a sec.");
+      await ctx.reply("I’m working on your last one—give me a sec.");
       return;
     }
 
@@ -96,15 +114,13 @@ export function registerAgent(bot) {
         limit: 18,
       });
 
-      const botProfile = buildBotProfile();
       const system = buildSystemPrompt({ hasUrl });
 
       const messages = [
         { role: "system", content: system },
-        { role: "system", content: "Bot Profile:\n" + botProfile },
         ...history.map((m) => ({
           role: m.role === "assistant" ? "assistant" : "user",
-          content: clampText(m.text, 2000),
+          content: clampText(m.text, 1600),
         })),
         {
           role: "user",
@@ -112,7 +128,7 @@ export function registerAgent(bot) {
             (hasUrl
               ? `Submission (includes URL: ${url}):\n${userText}`
               : `Submission:\n${userText}`) +
-            "\n\nReturn the roast in the exact required section order.",
+            "\n\nRespond using the required short-form VC structure.",
         },
       ];
 
@@ -124,7 +140,7 @@ export function registerAgent(bot) {
             platform: "telegram",
             userId,
             chatId,
-            feature: "roast",
+            feature: "vc_roast",
             hasUrl,
           },
         },
@@ -133,26 +149,19 @@ export function registerAgent(bot) {
 
       if (!res.ok) {
         console.log("[agent] ai failed", { status: res.status, err: res.error });
-        await ctx.reply("I couldn’t finish the roast right now. Try again in a bit.");
+        await ctx.reply("I couldn’t finish the analysis right now. Try again in a bit.");
         return;
       }
 
       let out = extractChatContent(res.json);
       if (!out) {
         console.log("[agent] ai missing output", { keys: Object.keys(res.json || {}) });
-        await ctx.reply("I got an empty roast back. Try again with a bit more detail.");
+        await ctx.reply("I got an empty response back. Try again with a bit more detail.");
         return;
       }
 
-      // Enforce: under 500 words (soft clamp)
-      if (wordCount(out) > 500) {
-        out = out
-          .split(/\s+/)
-          .slice(0, 500)
-          .join(" ")
-          .trim();
-        out = out + "\n\n(Trimmed to 500 words.)";
-      }
+      const maxChars = Number(process.env.AI_SHORT_MAX_CHARS || 1600);
+      out = truncateAtParagraphBoundary(out, Number.isFinite(maxChars) && maxChars > 300 ? maxChars : 1600);
 
       await addTurn({
         mongoUri: cfg.MONGODB_URI,

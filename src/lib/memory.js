@@ -14,6 +14,35 @@ function keyOf({ platform, userId, chatId }) {
   return c ? `${p}:${u}:${c}` : `${p}:${u}`;
 }
 
+function looksLikeSecret(s) {
+  const t = String(s || "");
+  if (!t) return false;
+  if (t.length > 20000) return true;
+  return (
+    /api[_-]?key\s*[:=]/i.test(t) ||
+    /secret\s*[:=]/i.test(t) ||
+    /password\s*[:=]/i.test(t) ||
+    /bearer\s+[a-z0-9\-_.=]+/i.test(t) ||
+    /sk-[a-z0-9]{10,}/i.test(t) ||
+    /xox[baprs]-/i.test(t) ||
+    /-----BEGIN [A-Z ]+PRIVATE KEY-----/i.test(t)
+  );
+}
+
+function redactSecrets(text) {
+  let t = String(text || "");
+  if (!t) return t;
+
+  t = t.replace(/(authorization\s*:\s*bearer\s+)[^\s]+/gi, "$1[REDACTED]");
+  t = t.replace(/(bearer\s+)[a-z0-9\-_.=]+/gi, "$1[REDACTED]");
+  t = t.replace(/sk-[a-z0-9]{10,}/gi, "sk-[REDACTED]");
+  t = t.replace(/(api[_-]?key\s*[:=]\s*)[^\s]+/gi, "$1[REDACTED]");
+  t = t.replace(/(password\s*[:=]\s*)[^\s]+/gi, "$1[REDACTED]");
+  t = t.replace(/-----BEGIN [A-Z ]+PRIVATE KEY-----[\s\S]*?-----END [A-Z ]+PRIVATE KEY-----/g, "[REDACTED_PRIVATE_KEY]");
+
+  return t;
+}
+
 export async function ensureMemoryIndexes(mongoUri) {
   const db = await getDb(mongoUri);
   if (!db) return;
@@ -26,12 +55,15 @@ export async function ensureMemoryIndexes(mongoUri) {
 }
 
 export async function addTurn({ mongoUri, platform, userId, chatId, role, text }) {
+  let safeText = String(text || "");
+  if (looksLikeSecret(safeText)) safeText = redactSecrets(safeText);
+
   const doc = {
     platform: String(platform || "telegram"),
     userId: String(userId || ""),
     chatId: chatId ? String(chatId) : "",
     role: role === "assistant" ? "assistant" : "user",
-    text: String(text || "").slice(0, 6000),
+    text: safeText.slice(0, 6000),
     ts: new Date(),
   };
 
@@ -78,7 +110,6 @@ export async function clearUserMemory({ mongoUri, platform, userId, chatId }) {
   const db = await getDb(mongoUri);
   if (!db) {
     mem.delete(keyOf({ platform, userId, chatId }));
-    // Also clear key without chatId to be safe
     mem.delete(keyOf({ platform, userId, chatId: "" }));
     return;
   }
