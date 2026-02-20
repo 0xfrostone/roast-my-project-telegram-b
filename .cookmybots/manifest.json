@@ -3,33 +3,30 @@
   "commands": [
     {
       "command": "/help",
-      "description": "Shows examples of good submissions and explains the roast output sections and score.",
+      "description": "Shows examples of good submissions and explains the short-form VC output sections.",
       "usage": "/help",
       "examples": [
-        "User: /help → Bot: Example submissions and what the response will include."
+        "User: /help → Bot: Example submissions + what the output includes (verdict, TAM, CAC, moat, GTM)."
       ],
-      "example": "User: /help → Bot: Example submissions and what the response will include.",
-      "notes": "Good for learning what details to include (ICP, pricing idea, link)."
+      "notes": "If critical info is missing, the bot may ask up to 2 questions at the end."
     },
     {
       "command": "/reset",
-      "description": "Clears your stored conversation memory for this chat.",
+      "description": "Clears your stored conversation memory for this chat (MongoDB if configured, otherwise in-memory fallback).",
       "usage": "/reset",
       "examples": [
         "User: /reset → Bot: Done. I’ve cleared your memory for this chat."
       ],
-      "example": "User: /reset → Bot: Done. I’ve cleared your memory for this chat.",
-      "notes": "If MongoDB is not configured, this clears in-memory fallback instead."
+      "notes": "Use this if the bot’s context feels off or you’re switching to a new project."
     },
     {
       "command": "/start",
-      "description": "Explains what Roast Critic does, what to submit, and the 1–10 Roast Score scale.",
+      "description": "Explains what to submit for a VC-style roast and what the 1–10 Roast Score means.",
       "usage": "/start",
       "examples": [
-        "User: /start → Bot: Instructions on what to submit and how scoring works."
+        "User: /start → Bot: Tells you what details to include (ICP, pricing, channel) and what the score represents."
       ],
-      "example": "User: /start → Bot: Instructions on what to submit and how scoring works.",
-      "notes": "Style boundary: savage about the idea, respectful to the person."
+      "notes": "Send a short description; include buyer, pricing, and acquisition channel if you want the sharpest output."
     }
   ],
   "aiMessages": [
@@ -40,6 +37,14 @@
     {
       "role": "assistant",
       "content": "Created Roast Critic as a full Telegram bot with command modules (/start, /help, /reset) registered via a loader, and an AI roast agent in src/features/agent.js registered after commands. Added CookMyBots AI Gateway client (src/lib/ai.js) with start/success/failure logs and timeout, MongoDB-backed long-term memory (memory_messages) with in-memory fallback, Bot Profile injection into every AI request, and production-safe polling via @grammyjs/runner with deleteWebhook, 409 conflict backoff, process-level crash guards, and in-flight locks/backpressure.\n\nFiles touched (17): .env.sample, DOCS.md, README.md, package.json, src/bot.js, src/commands/help.js…\nValidation: ✅ project passes syntax/basic checks after this edit."
+    },
+    {
+      "role": "user",
+      "content": "upgrade and Make it more investor-style (VC tone) Make it more analytical (TAM, CAC, moat focus), Shorten it for faster Telegram responses"
+    },
+    {
+      "role": "assistant",
+      "content": "Upgraded the agent to a compact VC-style analytical roast with the required short-form structure (verdict, investor-relevant score, TAM, CAC/unit economics, moat, GTM wedge, red flags, next steps). Updated Bot Profile injection accordingly, shortened /start and /help guidance to match, added a hard character cap with safe truncation, and added secret redaction before storing memory. README/DOCS/.env.sample were updated to reflect the new positioning and output format. Command routing and reliability behaviors were preserved (commands still registered before the catch-all, and slash commands always pass through).\n\nFiles touched (9): .env.sample, DOCS.md, README.md, package.json, src/commands/help.js, src/commands/start.js…\nValidation: ✅ project passes syntax/basic checks after this edit."
     }
   ],
   "createdBy": "69987ac8b8ce1531fe1e2007",
@@ -342,7 +347,7 @@
       "runId": "1f7eb59c-2200-4b77-861c-0a19a47c2cdf:mlv786yf:5j1q87",
       "lastUserMessage": "upgrade and Make it more investor-style (VC tone) Make it more analytical (TAM, CAC, moat focus), Shorten it for faster Telegram responses",
       "startedAt": "2026-02-20T15:30:42.573Z",
-      "updatedAt": "2026-02-20T18:05:18.884Z",
+      "updatedAt": "2026-02-20T18:05:19.122Z",
       "message": "Syncing environment template with used env variables…",
       "commands": [
         {
@@ -623,7 +628,7 @@
     "runId": "1f7eb59c-2200-4b77-861c-0a19a47c2cdf:mlv786yf:5j1q87",
     "lastUserMessage": "upgrade and Make it more investor-style (VC tone) Make it more analytical (TAM, CAC, moat focus), Shorten it for faster Telegram responses",
     "startedAt": "2026-02-20T15:30:42.573Z",
-    "updatedAt": "2026-02-20T18:05:18.884Z",
+    "updatedAt": "2026-02-20T18:05:19.122Z",
     "message": "Syncing environment template with used env variables…",
     "commands": [
       {
@@ -912,7 +917,7 @@
       "key": "COOKMYBOTS_AI_ENDPOINT",
       "title": "CookMyBots AI Endpoint",
       "description": "Base URL for the CookMyBots AI Gateway. Must be a base URL (no /chat suffix).",
-      "usage": "The bot calls POST {COOKMYBOTS_AI_ENDPOINT}/chat for roasts.",
+      "usage": "The bot calls POST {COOKMYBOTS_AI_ENDPOINT}/chat.",
       "howToGet": "Provided in CookMyBots project settings.",
       "example": "https://api.cookmybots.com/api/ai",
       "isSecret": false,
@@ -931,8 +936,8 @@
     {
       "key": "MONGODB_URI",
       "title": "MongoDB Connection URI",
-      "description": "Optional. Enables long-term memory storage in the memory_messages collection. If missing, the bot uses an in-memory fallback and logs a warning.",
-      "usage": "MongoDB is used to store and retrieve the last 10–20 turns for context and to support /reset.",
+      "description": "Enables long-term memory in the memory_messages collection. If missing, the bot falls back to in-memory memory and still supports /reset.",
+      "usage": "Stores conversation turns and retrieves the most recent 10–20 turns for context.",
       "howToGet": "Create a MongoDB database (e.g., MongoDB Atlas) and copy the connection string.",
       "example": "mongodb+srv://user:pass@cluster.example.mongodb.net/dbname",
       "isSecret": true,
@@ -941,8 +946,8 @@
     {
       "key": "AI_TIMEOUT_MS",
       "title": "AI Timeout",
-      "description": "Optional. Timeout in milliseconds for CookMyBots AI calls.",
-      "usage": "Used by the AI gateway client to abort slow requests.",
+      "description": "Timeout in milliseconds for AI gateway calls.",
+      "usage": "Used in src/lib/ai.js via AbortController to stop slow requests.",
       "howToGet": "Set manually (optional).",
       "example": "600000",
       "isSecret": false,
@@ -962,30 +967,30 @@
   "commandDocs": [
     {
       "command": "/start",
-      "description": "Explains what Roast Critic does, what to submit, and the 1–10 Roast Score scale.",
+      "description": "Explains what to submit for a VC-style roast and what the 1–10 Roast Score means.",
       "usage": "/start",
       "examples": [
-        "User: /start → Bot: Instructions on what to submit and how scoring works."
+        "User: /start → Bot: Tells you what details to include (ICP, pricing, channel) and what the score represents."
       ],
-      "notes": "Style boundary: savage about the idea, respectful to the person."
+      "notes": "Send a short description; include buyer, pricing, and acquisition channel if you want the sharpest output."
     },
     {
       "command": "/help",
-      "description": "Shows examples of good submissions and explains the roast output sections and score.",
+      "description": "Shows examples of good submissions and explains the short-form VC output sections.",
       "usage": "/help",
       "examples": [
-        "User: /help → Bot: Example submissions and what the response will include."
+        "User: /help → Bot: Example submissions + what the output includes (verdict, TAM, CAC, moat, GTM)."
       ],
-      "notes": "Good for learning what details to include (ICP, pricing idea, link)."
+      "notes": "If critical info is missing, the bot may ask up to 2 questions at the end."
     },
     {
       "command": "/reset",
-      "description": "Clears your stored conversation memory for this chat.",
+      "description": "Clears your stored conversation memory for this chat (MongoDB if configured, otherwise in-memory fallback).",
       "usage": "/reset",
       "examples": [
         "User: /reset → Bot: Done. I’ve cleared your memory for this chat."
       ],
-      "notes": "If MongoDB is not configured, this clears in-memory fallback instead."
+      "notes": "Use this if the bot’s context feels off or you’re switching to a new project."
     }
   ]
 }
