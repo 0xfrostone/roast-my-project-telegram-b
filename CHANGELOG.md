@@ -2,6 +2,11 @@
 
 All notable changes to this bot project are recorded here.
 
+## 2026-02-21 07:08:21. UTC
+- Request: upgrade and Make it more investor-style (VC tone) Make it more analytical (TAM, CAC, moat focus), Shorten it for faster Telegram responses
+- Summary: Updated the agent to a stricter VC-style pitch analysis with the exact A–I section order, tighter length (default 1200 chars), and a question-asking rule that skips questions when ICP + pricing + channel are present. Up…
+- Files: .env.sample, DOCS.md, README.md, package.json, src/commands/help.js, src/commands/start.js, src/features/agent.js, src/lib/botProfile.js
+
 ## 2026-02-20 18:05:18. UTC
 - Request: upgrade and Make it more investor-style (VC tone) Make it more analytical (TAM, CAC, moat focus), Shorten it for faster Telegram responses
 - Summary: Upgraded the agent to a compact VC-style analytical roast with the required short-form structure (verdict, investor-relevant score, TAM, CAC/unit economics, moat, GTM wedge, red flags, next steps). Updated Bot Profile i…

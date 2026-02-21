@@ -3,13 +3,12 @@
   "commands": [
     {
       "command": "/help",
-      "description": "Shows examples of good submissions and explains the short-form VC output sections.",
+      "description": "Shows examples and the exact output format (A–I).",
       "usage": "/help",
       "examples": [
-        "User: /help → Bot: Example submissions + what the output includes (verdict, TAM, CAC, moat, GTM)."
+        "User: /help → Bot: Shows examples and lists the A)–I) sections."
       ],
-      "example": "User: /help → Bot: Example submissions + what the output includes (verdict, TAM, CAC, moat, GTM).",
-      "notes": "If critical info is missing, the bot may ask up to 2 questions at the end."
+      "notes": "If your pitch includes ICP + pricing + acquisition channel, the bot won’t ask follow-up questions."
     },
     {
       "command": "/reset",
@@ -18,18 +17,16 @@
       "examples": [
         "User: /reset → Bot: Done. I’ve cleared your memory for this chat."
       ],
-      "example": "User: /reset → Bot: Done. I’ve cleared your memory for this chat.",
-      "notes": "Use this if the bot’s context feels off or you’re switching to a new project."
+      "notes": "Use this when switching to a new project or if context feels off."
     },
     {
       "command": "/start",
-      "description": "Explains what to submit for a VC-style roast and what the 1–10 Roast Score means.",
+      "description": "Explains what to submit to get the best VC-style analysis.",
       "usage": "/start",
       "examples": [
-        "User: /start → Bot: Tells you what details to include (ICP, pricing, channel) and what the score represents."
+        "User: /start → Bot: Asks for ICP, pricing/ACV, and acquisition channel."
       ],
-      "example": "User: /start → Bot: Tells you what details to include (ICP, pricing, channel) and what the score represents.",
-      "notes": "Send a short description; include buyer, pricing, and acquisition channel if you want the sharpest output."
+      "notes": "Send your pitch as normal text. The bot answers only non-command messages."
     }
   ],
   "aiMessages": [
@@ -50,6 +47,14 @@
       "content": "Upgraded the agent to a compact VC-style analytical roast with the required short-form structure (verdict, investor-relevant score, TAM, CAC/unit economics, moat, GTM wedge, red flags, next steps). Updated Bot Profile injection accordingly, shortened /start and /help guidance to match, added a hard character cap with safe truncation, and added secret redaction before storing memory. README/DOCS/.env.sample were updated to reflect the new positioning and output format. Command routing and reliability behaviors were preserved (commands still registered before the catch-all, and slash commands always pass through).\n\nFiles touched (9): .env.sample, DOCS.md, README.md, package.json, src/commands/help.js, src/commands/start.js…\nValidation: ✅ project passes syntax/basic checks after this edit.",
       "gitBeforeSha": "803ab4a6c2ec0ba51f7ca0a2c510fd19240924c4",
       "gitAfterSha": "24bbe9dac321b68825fb49c30c55ad996378ac48"
+    },
+    {
+      "role": "user",
+      "content": "upgrade and Make it more investor-style (VC tone) Make it more analytical (TAM, CAC, moat focus), Shorten it for faster Telegram responses"
+    },
+    {
+      "role": "assistant",
+      "content": "Updated the agent to a stricter VC-style pitch analysis with the exact A–I section order, tighter length (default 1200 chars), and a question-asking rule that skips questions when ICP + pricing + channel are present. Updated Bot Profile injection, /start and /help text, and DOCS/README to match. Pinned @grammyjs/runner to 2.0.3 to avoid deploy notarget issues.\n\nFiles touched (8): .env.sample, DOCS.md, README.md, package.json, src/commands/help.js, src/commands/start.js…\nValidation: ✅ project passes syntax/basic checks after this edit."
     }
   ],
   "createdBy": "69987ac8b8ce1531fe1e2007",
@@ -646,7 +651,7 @@
       "runId": "1f7eb59c-2200-4b77-861c-0a19a47c2cdf:mlvz7cb7:om211z",
       "lastUserMessage": "upgrade and Make it more investor-style (VC tone) Make it more analytical (TAM, CAC, moat focus), Shorten it for faster Telegram responses",
       "startedAt": "2026-02-20T15:30:42.573Z",
-      "updatedAt": "2026-02-21T07:08:21.183Z",
+      "updatedAt": "2026-02-21T07:08:21.626Z",
       "message": "Syncing environment template with used env variables…",
       "commands": [
         {
@@ -941,7 +946,7 @@
     "runId": "1f7eb59c-2200-4b77-861c-0a19a47c2cdf:mlvz7cb7:om211z",
     "lastUserMessage": "upgrade and Make it more investor-style (VC tone) Make it more analytical (TAM, CAC, moat focus), Shorten it for faster Telegram responses",
     "startedAt": "2026-02-20T15:30:42.573Z",
-    "updatedAt": "2026-02-21T07:08:21.183Z",
+    "updatedAt": "2026-02-21T07:08:21.626Z",
     "message": "Syncing environment template with used env variables…",
     "commands": [
       {
@@ -1244,7 +1249,7 @@
       "key": "COOKMYBOTS_AI_ENDPOINT",
       "title": "CookMyBots AI Endpoint",
       "description": "Base URL for the CookMyBots AI Gateway. Must be a base URL (no /chat suffix).",
-      "usage": "The bot calls POST {COOKMYBOTS_AI_ENDPOINT}/chat.",
+      "usage": "The bot calls POST {COOKMYBOTS_AI_ENDPOINT}/chat via src/lib/ai.js.",
       "howToGet": "Provided in CookMyBots project settings.",
       "example": "https://api.cookmybots.com/api/ai",
       "isSecret": false,
@@ -1263,8 +1268,8 @@
     {
       "key": "MONGODB_URI",
       "title": "MongoDB Connection URI",
-      "description": "Enables long-term memory in the memory_messages collection. If missing, the bot falls back to in-memory memory and still supports /reset.",
-      "usage": "Stores conversation turns and retrieves the most recent 10–20 turns for context.",
+      "description": "Optional. Enables long-term memory in the memory_messages collection. If missing, the bot falls back to in-memory storage without crashing.",
+      "usage": "Stores conversation turns and retrieves the most recent 10–20 turns as context.",
       "howToGet": "Create a MongoDB database (e.g., MongoDB Atlas) and copy the connection string.",
       "example": "mongodb+srv://user:pass@cluster.example.mongodb.net/dbname",
       "isSecret": true,
@@ -1273,8 +1278,8 @@
     {
       "key": "AI_TIMEOUT_MS",
       "title": "AI Timeout",
-      "description": "Timeout in milliseconds for AI gateway calls.",
-      "usage": "Used in src/lib/ai.js via AbortController to stop slow requests.",
+      "description": "Optional. Timeout in milliseconds for CookMyBots AI calls.",
+      "usage": "Used by src/lib/ai.js AbortController timeout; defaults to 600000.",
       "howToGet": "Set manually (optional).",
       "example": "600000",
       "isSecret": false,
@@ -1289,26 +1294,36 @@
       "example": "https://your-service.onrender.com",
       "isSecret": false,
       "required": false
+    },
+    {
+      "key": "AI_SHORT_MAX_CHARS",
+      "title": "Max Reply Length",
+      "description": "Optional. Hard cap for assistant replies to keep them fast to read on Telegram.",
+      "usage": "Agent truncates output safely at paragraph/sentence boundaries; defaults to 1200.",
+      "howToGet": "Set manually (optional).",
+      "example": "1200",
+      "isSecret": false,
+      "required": false
     }
   ],
   "commandDocs": [
     {
       "command": "/start",
-      "description": "Explains what to submit for a VC-style roast and what the 1–10 Roast Score means.",
+      "description": "Explains what to submit to get the best VC-style analysis.",
       "usage": "/start",
       "examples": [
-        "User: /start → Bot: Tells you what details to include (ICP, pricing, channel) and what the score represents."
+        "User: /start → Bot: Asks for ICP, pricing/ACV, and acquisition channel."
       ],
-      "notes": "Send a short description; include buyer, pricing, and acquisition channel if you want the sharpest output."
+      "notes": "Send your pitch as normal text. The bot answers only non-command messages."
     },
     {
       "command": "/help",
-      "description": "Shows examples of good submissions and explains the short-form VC output sections.",
+      "description": "Shows examples and the exact output format (A–I).",
       "usage": "/help",
       "examples": [
-        "User: /help → Bot: Example submissions + what the output includes (verdict, TAM, CAC, moat, GTM)."
+        "User: /help → Bot: Shows examples and lists the A)–I) sections."
       ],
-      "notes": "If critical info is missing, the bot may ask up to 2 questions at the end."
+      "notes": "If your pitch includes ICP + pricing + acquisition channel, the bot won’t ask follow-up questions."
     },
     {
       "command": "/reset",
@@ -1317,7 +1332,7 @@
       "examples": [
         "User: /reset → Bot: Done. I’ve cleared your memory for this chat."
       ],
-      "notes": "Use this if the bot’s context feels off or you’re switching to a new project."
+      "notes": "Use this when switching to a new project or if context feels off."
     }
   ]
 }
