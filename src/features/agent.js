@@ -25,46 +25,53 @@ function keyFor(ctx) {
   return userId ? `u:${userId}` : `c:${chatId}`;
 }
 
-function truncateAtParagraphBoundary(text, maxChars) {
+function truncateAtBoundary(text, maxChars) {
   const t = String(text || "").trim();
   if (t.length <= maxChars) return t;
 
   const slice = t.slice(0, maxChars);
   const idx = Math.max(slice.lastIndexOf("\n\n"), slice.lastIndexOf("\n"));
-
-  if (idx > Math.floor(maxChars * 0.6)) {
-    return slice.slice(0, idx).trim() + "\n\n(Trimmed.)";
-  }
+  if (idx > Math.floor(maxChars * 0.6)) return slice.slice(0, idx).trim() + "\n\n(Trimmed.)";
 
   const idx2 = Math.max(slice.lastIndexOf(". "), slice.lastIndexOf(".\n"), slice.lastIndexOf("; "));
-  if (idx2 > Math.floor(maxChars * 0.6)) {
-    return slice.slice(0, idx2 + 1).trim() + " (Trimmed.)";
-  }
+  if (idx2 > Math.floor(maxChars * 0.6)) return slice.slice(0, idx2 + 1).trim() + " (Trimmed.)";
 
   return slice.trim() + "…";
 }
 
-function buildSystemPrompt({ hasUrl }) {
-  const botProfile = buildBotProfile();
+function hasIcpPricingChannel(text) {
+  const t = String(text || "").toLowerCase();
 
-  const style = [
-    "You are a VC/investor doing a fast, high-signal evaluation.",
-    "Be crisp, analytical, and slightly blunt about the business. Always respectful to the person.",
-    "Plain text only. No markdown.",
-    "Default to short output that fits a quick Telegram read.",
-    "If critical info is missing that blocks TAM/CAC/moat assessment, ask at most 2 questions at the end.",
-    "Do not ask questions unless it materially changes the evaluation.",
+  const icp = /\b(icp|who buys|buyer|customer|users?|teams?|clinics?|companies|smb|enterprise|mid-market|persona)\b/.test(t);
+  const pricing = /\b(\$\s*\d|price|pricing|per\s*(seat|user|month|mo|yr|year)|subscription|acv|arr|mrr|take\s*rate|commission|bps|%|freemium)\b/.test(t);
+  const channel = /\b(acquisition|channel|gtm|go-to-market|outbound|inbound|ads?|seo|content|partnerships?|marketplace|plg|sales-led|cold\s*email|linkedin|affiliates?|resellers?)\b/.test(t);
+
+  return icp && pricing && channel;
+}
+
+function buildSystemPrompt({ hasUrl, userText }) {
+  const botProfile = buildBotProfile();
+  const alreadyHasKeyInfo = hasIcpPricingChannel(userText);
+
+  const instructions = [
+    "You are evaluating this like a VC partner. Be direct, analytical, and compact.",
+    "No long intros. No generic encouragement. No repeating the pitch.",
+    "If you must assume numbers (TAM, CAC, etc.), label them as assumptions and keep them plausible.",
+    "Do not fabricate traction or customers.",
     "",
-    "You MUST follow the required output structure exactly and keep each section short.",
-    "Red flags: up to 3 items max.",
-    "Next steps: exactly 2 actions.",
+    "You MUST output in the exact section order A) through I) and keep each section short.",
+    "Section E (Moat) must be 1–3 numbered lines formatted exactly like: 1) ...",
+    "Section I (Questions) must be omitted entirely if not needed.",
+    alreadyHasKeyInfo
+      ? "The user already provided ICP + pricing + acquisition channel (or close). Do NOT ask questions."
+      : "If critical info is missing for TAM/CAC/moat, ask at most 2 questions at the end in section I.",
   ].join("\n");
 
   const linkNote = hasUrl
-    ? "\n\nUser included a URL. You may comment on positioning/landing-page clarity, but do not claim you browsed the page unless the user explicitly pasted content."
+    ? "\n\nUser included a URL. You may comment on positioning/landing-page clarity, but do not claim you browsed the page unless the user pasted content."
     : "";
 
-  return botProfile + "\n\n" + style + linkNote;
+  return botProfile + "\n\n" + instructions + linkNote;
 }
 
 export function registerAgent(bot) {
@@ -75,13 +82,13 @@ export function registerAgent(bot) {
     const k = keyFor(ctx);
 
     if (inflightByKey.get(k)) {
-      await ctx.reply("I’m working on your last one—give me a sec.");
+      await ctx.reply("Working on your last one—give me a sec.");
       return;
     }
 
     const cap = Number.isFinite(cfg.GLOBAL_INFLIGHT_CAP) ? cfg.GLOBAL_INFLIGHT_CAP : 2;
     if (globalInflight >= Math.max(1, cap)) {
-      await ctx.reply("Busy, try again in a moment.");
+      await ctx.reply("Busy. Try again in a moment.");
       return;
     }
 
@@ -111,26 +118,28 @@ export function registerAgent(bot) {
         platform: "telegram",
         userId,
         chatId,
-        limit: 18,
+        limit: 16,
       });
 
-      const system = buildSystemPrompt({ hasUrl });
+      const system = buildSystemPrompt({ hasUrl, userText });
 
       const messages = [
         { role: "system", content: system },
         ...history.map((m) => ({
           role: m.role === "assistant" ? "assistant" : "user",
-          content: clampText(m.text, 1600),
+          content: clampText(m.text, 1400),
         })),
         {
           role: "user",
           content:
             (hasUrl
-              ? `Submission (includes URL: ${url}):\n${userText}`
-              : `Submission:\n${userText}`) +
-            "\n\nRespond using the required short-form VC structure.",
+              ? `Pitch (includes URL: ${url}):\n${userText}`
+              : `Pitch:\n${userText}`) +
+            "\n\nReturn the analysis in the required A)–I) format. Keep it short.",
         },
       ];
+
+      const timeoutMs = Number(process.env.AI_TIMEOUT_MS || cfg.AI_TIMEOUT_MS || 600000);
 
       const res = await aiChat(
         cfg,
@@ -140,28 +149,31 @@ export function registerAgent(bot) {
             platform: "telegram",
             userId,
             chatId,
-            feature: "vc_roast",
+            feature: "vc_pitch_analysis",
             hasUrl,
           },
         },
-        { timeoutMs: cfg.AI_TIMEOUT_MS, retries: cfg.AI_MAX_RETRIES }
+        {
+          timeoutMs: Number.isFinite(timeoutMs) && timeoutMs > 0 ? timeoutMs : 600000,
+          retries: cfg.AI_MAX_RETRIES,
+        }
       );
 
       if (!res.ok) {
         console.log("[agent] ai failed", { status: res.status, err: res.error });
-        await ctx.reply("I couldn’t finish the analysis right now. Try again in a bit.");
+        await ctx.reply("Couldn’t finish the analysis right now. Try again in a bit.");
         return;
       }
 
       let out = extractChatContent(res.json);
       if (!out) {
         console.log("[agent] ai missing output", { keys: Object.keys(res.json || {}) });
-        await ctx.reply("I got an empty response back. Try again with a bit more detail.");
+        await ctx.reply("I got an empty response. Try again with a bit more detail.");
         return;
       }
 
-      const maxChars = Number(process.env.AI_SHORT_MAX_CHARS || 1600);
-      out = truncateAtParagraphBoundary(out, Number.isFinite(maxChars) && maxChars > 300 ? maxChars : 1600);
+      const maxChars = Number(process.env.AI_SHORT_MAX_CHARS || 1200);
+      out = truncateAtBoundary(out, Number.isFinite(maxChars) && maxChars > 300 ? maxChars : 1200);
 
       await addTurn({
         mongoUri: cfg.MONGODB_URI,

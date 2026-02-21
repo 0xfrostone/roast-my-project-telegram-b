@@ -2,17 +2,25 @@ export default function register(bot) {
   bot.command("help", async (ctx) => {
     await ctx.reply(
       [
-        "Send a short project description and I’ll reply in a compact VC-style format.",
+        "Send a short pitch and I’ll reply in a compact investor format.",
+        "Best inputs include: ICP, pricing/ACV, and acquisition channel (plus any traction).",
         "",
-        "Good submission examples:",
-        "1) “We sell compliance automation to dental clinics. $299/mo per location. Acquisition via partnerships with practice management software consultants. Early: 12 paying customers.”",
-        "2) “B2B: AI inbox triage for customer support teams. ICP: 50–500 seat SaaS. Pricing: $40/agent/mo. Channel: app marketplace + outbound to support leaders. https://example.com”",
+        "Examples:",
+        "1) “We automate insurance verification for dental clinics. Buyer: office manager. $299/mo/location. Channel: partnerships with PMS consultants. 12 paying clinics.”",
+        "2) “AI triage for support inboxes. ICP: 50–500 seat SaaS support teams. $40/agent/mo. Channel: Zendesk marketplace + outbound to support leaders.”",
         "",
-        "What you’ll get back:",
-        "Verdict, Roast Score (1–10), TAM snapshot, unit economics & CAC check, moat, GTM wedge, up to 3 red flags, and 2 next steps.",
+        "Output sections (always in this order):",
+        "A) Verdict",
+        "B) Roast Score (1–10)",
+        "C) TAM",
+        "D) CAC and payback",
+        "E) Moat",
+        "F) GTM",
+        "G) Biggest risk",
+        "H) Next step",
+        "I) Up to 2 questions (only if needed)",
         "",
-        "If you leave out critical info (buyer, pricing, channel, usage frequency, traction), I’ll ask up to 2 questions.",
-        "Need a fresh slate? Use /reset.",
+        "Use /reset to clear your stored memory for this chat.",
       ].join("\n")
     );
   });
